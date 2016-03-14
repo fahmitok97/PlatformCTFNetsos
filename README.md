@@ -98,3 +98,42 @@ Database Design
 	- participation_id
 	- contest_task_item_id
 	- bonus_score
+
+
+ADMINISTRATION FEATURE
+======================
+- Create/Edit Tasks
+	- Each task has:
+		- Title
+		- Description
+		- Category
+		- Flag / answer
+		- Points
+		- enabled in archive
+
+- Create/Edit Contests
+	- Each contest has:
+		- Title
+		- Description
+		- Available date
+	- Assign available tasks to contests
+		- available date
+		- prerequisite condition
+		- score
+	- More mode to be added...
+
+- Create hint
+	- each hint has:
+		- Title
+		- Description
+		- Task_id
+		- Enabled?
+
+- Create category
+	- each category has:
+		- name
+		- description
+
+- See and moderate submissions
+
+- Users control
