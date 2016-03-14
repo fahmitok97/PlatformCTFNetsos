@@ -1,5 +1,7 @@
 <?php
 
+use App\Contest;
+
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -12,7 +14,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	$contests = Contest::all();
+    return view('test', ['contests' => $contests]);
+});
+
+Route::get('/contest/{contest}', function(Contest $contest) {
+	return view('testcontest', ['contest' => $contest]);
 });
 
 /*
