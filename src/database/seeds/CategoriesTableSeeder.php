@@ -13,7 +13,34 @@ class CategoriesTableSeeder extends Seeder
     {
         DB::table('categories')->insert([
             'name' => 'Cryptography',
-            'description' => 'crypting language',
+            'description' => 'crypting language, encoding and decoding',
         ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Web Hacking',
+            'description' => 'assessing vurnerabilities in web and exploit them',
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Forensic',
+            'description' => 'see what they left behind',
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Reverse Engineering',
+            'description' => 'reverse things, undo or redo',
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Exploitation',
+            'description' => 'pwn before your enemies pwn',
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Miscellaneous',
+            'description' => 'trivial things matter',
+        ]);
+
+
     }
 }

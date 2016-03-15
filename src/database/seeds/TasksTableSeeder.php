@@ -12,14 +12,35 @@ class TasksTableSeeder extends Seeder
     public function run()
     {
         DB::table('tasks')->insert([
-            'title' => 'case#1',
-            'description' => 'ini case1',
-            'category_id' => 1,
+            'title' => 'The force',
+            'description' => 'Please brute force this passwd file, use john if you want. Please solve this',
+            'category_id' => 6,
         ]);
+
         DB::table('tasks')->insert([
-            'title' => 'case#2',
-            'description' => 'ini case2',
+            'title' => 'base64docede',
+            'description' => 'please decode this string use base64, I know you can do it',
             'category_id' => 1,
         ]);
+
+        DB::table('tasks')->insert([
+            'title' => 'caesar cipher',
+            'description' => 'cipher replace strings here, hint is the name of an ape',
+            'category_id' => 1,
+        ]);
+
+        DB::table('tasks')->insert([
+            'title' => 'sqlInjection',
+            'description' => 'can you login as admin',
+            'category_id' => 2,
+        ]);
+
+        DB::table('tasks')->insert([
+            'title' => 'androidAPK',
+            'description' => 'reverse android APK, apk can be extracted :v',
+            'category_id' => 4,
+        ]);
+
+
     }
 }

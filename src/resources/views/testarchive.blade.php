@@ -12,20 +12,20 @@
 
 	<div class="container">
 
-		<h1>{{$contest->title}}</h1>
-		<h4>{{$contest->description}}</h4>
+		<h1>{{$category->name}}</h1>
+		<h4>{{$category->description}}</h4>
 
 		<br>
 
 		<div class="row">
 			<div class="col-md-8">
 
-				@forelse ($contest->contestTasks as $ctask)
+				@forelse ($category->tasks as $task)
 					<div class="card">
-						<div class="card-header">{{$ctask->task->category->name}}</div>
+						<div class="card-header">{{$task->category->name}}</div>
 						<div class="card-block">
-							<h3>{{$ctask->task->title}}</h3>
-							<p>{{$ctask->task->description}}</p>
+							<h3>{{$task->title}}</h3>
+							<p>{{$task->description}}</p>
 							<form>
 								<fieldset class="form-group">
 									<input class="form-control" placeholder="insert flag here">
@@ -35,7 +35,7 @@
 					</div>
 
 				@empty
-					<p>Empty contest</p>
+					<p>Empty category task</p>
 
 				@endforelse
 

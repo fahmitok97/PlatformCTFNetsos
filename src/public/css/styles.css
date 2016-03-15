@@ -1,0 +1,16 @@
+.block-row {
+	background-color: #eee;
+	padding: 50px;
+}
+
+.card-fixed-height {
+	height: 200px;
+}
+
+.center {
+	text-align: center;
+}
+
+.navbar {
+	padding: 20px;
+}

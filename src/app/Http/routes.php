@@ -1,6 +1,7 @@
 <?php
 
 use App\Contest;
+use App\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +16,19 @@ use App\Contest;
 
 Route::get('/', function () {
 	$contests = Contest::all();
-    return view('test', ['contests' => $contests]);
+ 	$categories = Category::all();
+    return view('test', [
+    	'contests' => $contests,
+    	'categories' => $categories
+    ]);
 });
 
 Route::get('/contest/{contest}', function(Contest $contest) {
 	return view('testcontest', ['contest' => $contest]);
+});
+
+Route::get('/category/{category}', function(Category $category) {
+	return view('testarchive', ['category' => $category]);
 });
 
 /*
