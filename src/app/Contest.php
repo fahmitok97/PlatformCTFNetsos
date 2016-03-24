@@ -8,11 +8,11 @@ class Contest extends Model
 {
 
     public function tasks() {
-        return $this->hasMany('App\Task');
+        return $this->belongsToMany('App\Task');
     }
 
     public function hints() {
-        return $this->hasMany('App\Hint');
+        return $this->belongsToMany('App\Hint');
     }
 
     public function participations() {

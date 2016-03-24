@@ -49,8 +49,16 @@ use App\Category;
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', function() {
    	  	$categories = Category::all();
+   	  	$contests = Contest::all();
     	return view('front', [
     			'categories' => $categories,
+    			'contests' => $contests
+    		]);
+    });
+
+    Route::get('/contest/{contest}', function(Contest $contest) {
+    	return view('contest', [
+    			'contest' => $contest
     		]);
     });
 });

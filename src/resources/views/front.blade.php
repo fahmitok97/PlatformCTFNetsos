@@ -13,9 +13,9 @@
 
 		<div class="row">
 			<div class="col-md-8">
-				<h2>Fortnight CTF #2</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, ad aspernatur perferendis. Odit, atque consequatur animi non accusamus nam incidunt sunt ipsa maxime commodi obcaecati inventore blanditiis vitae modi ullam.</p>
-				<a href="" class="btn btn-default">Join</a>
+				<h2>{{$contests[0] -> name}}</h2>
+				<p>{{$contests[0] -> description}}</p>
+				<a href="/contest/{{$contests[0]->id}}" class="btn btn-default">Join</a>
 			</div>
 			<div class="col-md-4">
 				<h3>Login</h3>
@@ -38,20 +38,16 @@
 	<div class="row">
 		<div class="col-md-6">
 			news
-			<div class="panel panel-default">
-				<div class="panel-heading">FortnightCTF#1</div>
-				<div class="panel-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio id molestias quos alias, ab, facilis reprehenderit veniam, animi assumenda esse magnam fugiat illo, laborum? Mollitia ex impedit, esse illo optio?</p>
-					<a href="" class="btn btn-default">join</a>
+
+			@foreach ($contests as $contest)
+				<div class="panel panel-default">
+					<div class="panel-heading">{{$contest->name}}</div>
+					<div class="panel-body">
+						<p> {{$contest->description}} </p>
+						<a href="/contest/{{$contest->id}}" class="btn btn-default">join</a>
+					</div>
 				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">FortnightCTF#0</div>
-				<div class="panel-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum nulla, sit libero aspernatur alias temporibus corrupti veniam provident accusantium facilis architecto ipsum dignissimos non dolore voluptates possimus vero fuga illum!</p>
-					<a href="" class="btn btn-default">join</a>
-				</div>
-			</div>
+			@endforeach
 			<a href="" class="btn btn-default">More news</a>
 		</div>
 		<div class="col-md-3">
@@ -133,4 +129,4 @@
 	</div>
 </div>
 
-@endsection()
+@endsection

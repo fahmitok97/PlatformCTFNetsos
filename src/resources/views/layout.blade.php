@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>CTF Platform</title>
 
-    <link href="css/app.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
   </head>
 
   <body>
@@ -21,7 +21,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Brand</a>
+          <a class="navbar-brand" href="/">CTF</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
