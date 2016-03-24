@@ -14,22 +14,26 @@ use App\Category;
 |
 */
 
-Route::get('/', function () {
-	$contests = Contest::all();
- 	$categories = Category::all();
-    return view('test', [
-    	'contests' => $contests,
-    	'categories' => $categories
-    ]);
-});
+// Route::get('/', function () {
+// 	$contests = Contest::all();
+//  	$categories = Category::all();
+//     return view('test', [
+//     	'contests' => $contests,
+//     	'categories' => $categories
+//     ]);
+// });
 
-Route::get('/contest/{contest}', function(Contest $contest) {
-	return view('testcontest', ['contest' => $contest]);
-});
+// Route::get('/contest/{contest}', function(Contest $contest) {
+// 	return view('testcontest', ['contest' => $contest]);
+// });
 
-Route::get('/category/{category}', function(Category $category) {
-	return view('testarchive', ['category' => $category]);
-});
+// Route::get('/category/{category}', function(Category $category) {
+// 	return view('testarchive', ['category' => $category]);
+// });
+
+// Route::get('/login', function() {
+// 	return view('login');
+// });
 
 /*
 |--------------------------------------------------------------------------
@@ -43,5 +47,10 @@ Route::get('/category/{category}', function(Category $category) {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('/', function() {
+   	  	$categories = Category::all();
+    	return view('front', [
+    			'categories' => $categories,
+    		]);
+    });
 });

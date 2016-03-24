@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContestTasksTable extends Migration
+class CreateSubmissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,15 @@ class CreateContestTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('contest_task', function (Blueprint $table) {
-            $table->integer('contest_id')->unsigned();
+        Schema::create('submissions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->dateTime('added_time');
+            $table->integer('participation_id')->unsigned();
             $table->integer('task_id')->unsigned();
-            $table->integer('points');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
-            $table->foreign('contest_id')->references('id')->on('contests');
+            $table->string('submitted_answer');
+            $table->integer('status');
+            $table->foreign('participation_id')->references('id')->on('participations');
             $table->foreign('task_id')->references('id')->on('tasks');
-            $table->primary(array('task_id', 'contest_id'));
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateContestTasksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('contest_task');
+        Schema::drop('submissions');
     }
 }

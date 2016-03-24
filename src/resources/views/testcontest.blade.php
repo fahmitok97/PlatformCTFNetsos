@@ -35,7 +35,7 @@
 					</div>
 
 				@empty
-					<p>Empty contest</p>
+					<p>Empty contestTasks</p>
 
 				@endforelse
 

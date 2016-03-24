@@ -1,0 +1,23 @@
+{
+  "name": "platformCTFNetsos",
+  "description": "Platform CTF created by Netsos RISTEK Fasilkom UI",
+  "main": "",
+  "authors": [
+    "adamyordan <adamyordan@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/adamyordan/PlatformCTFNetsos",
+  "moduleType": [
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "bootstrap-sass-official#^3.3.6"
+  }
+}

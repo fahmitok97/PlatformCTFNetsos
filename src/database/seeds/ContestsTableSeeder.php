@@ -12,12 +12,12 @@ class ContestsTableSeeder extends Seeder
     public function run()
     {
         DB::table('contests')->insert([
-            'title' => 'fortnightCTF#1',
+            'name' => 'fortnightCTF#1',
             'description' => 'first ever fortnightCTF',
         ]);
 
         DB::table('contests')->insert([
-            'title' => 'fortnightCTF#2',
+            'name' => 'fortnightCTF#2',
             'description' => 'second fortnightCTF',
         ]);
     }

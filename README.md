@@ -73,12 +73,15 @@ Database Design
 - Hints
 	- id [PK]
 	- content
+	- task_id
 
-- contest_task_items
-	- id [PK]
+- hint_contest
+	- hint_id
+	- contest_id
+
+- contest_task
 	- contest
 	- task
-	- hint
 	- points
 
 - submissions

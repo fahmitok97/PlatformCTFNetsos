@@ -1,2 +1,35 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "vendor/bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
+
+$primaryColor: #39424e;
+
+body { 
+	padding-top: 50px; 
+}
+
+.block-row {
+	background-color: #eee;
+	padding: 50px;
+}
+
+.navbar-inverse {
+	background-color: $primaryColor;
+	border: 0px;
+}
+
+.front-jumbotron {
+	background-color: $primaryColor;
+	color: white;
+	min-height: 640px;
+}
+
+@media (min-width: 1200px) {
+	.small-container {
+		max-width: 970px !important;
+	}	
+}
+
+.panel-category {
+	height: 350px;
+	text-align: center;
+}

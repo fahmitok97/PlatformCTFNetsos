@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<link rel="stylesheet" href="/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="/css/app.css">
 </head>
 <body>
 
@@ -35,6 +34,79 @@
 				<a class="btn btn-secondary">more contests</a>
 
 			</div>
+
+		    <div class="col-md-4">
+				<div class="card">
+				  <div class="card-header">
+				    Top Rating
+				  </div>
+				  <div class="card-block">
+					<table class="table table-sm table-striped">
+				  <thead class="thead">
+				    <tr>
+				      <th>#</th>
+				      <th>Handle</th>
+				      <th>Rating</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <th scope="row">1</th>
+				      <td>OneTrueExploooooooooosion</td>
+				      <td>510</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">2</th>
+				      <td>BurningShiningUltimateFalcon</td>
+				      <td>510</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">3</th>
+				      <td>rkkautsar</td>
+				      <td>510</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">4</th>
+				      <td>AkuGanteng</td>
+				      <td>510</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">5</th>
+				      <td>hikshiks</td>
+				      <td>510</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">6</th>
+				      <td>nyamnyam</td>
+				      <td>410</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">7</th>
+				      <td>Tantra</td>
+				      <td>360</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">8</th>
+				      <td>kay</td>
+				      <td>210</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">9</th>
+				      <td>Adfernas</td>
+				      <td>210</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">10</th>
+				      <td>HIT(p)ler</td>
+				      <td>210</td>
+				    </tr>
+				  </tbody>
+				</table>
+			  </div>
+			</div>	    	
+		    <button type="button" class="btn btn-secondary">Full Scoreboard</button>
+	    </div>
+
 		</div>
 		
 	</div>

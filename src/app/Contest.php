@@ -6,10 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contest extends Model
 {
-    //
 
-    public function contestTasks() {
-        return $this->hasMany('App\ContestTask');
+    public function tasks() {
+        return $this->hasMany('App\Task');
+    }
+
+    public function hints() {
+        return $this->hasMany('App\Hint');
+    }
+
+    public function participations() {
+    	return $this->hasMany('App\Participation');
     }
 
 }
