@@ -2,6 +2,7 @@
 
 use App\Contest;
 use App\Category;
+use App\Task;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,8 +58,32 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Route::get('/contest/{contest}', function(Contest $contest) {
+
+        $category_ids = $contest->tasks->pluck('category_id')->all();
+        $categories =  Category::find($category_ids);
+
     	return view('contest', [
-    			'contest' => $contest
+    			'contest' => $contest,
+                'categories' => $categories
     		]);
+    });
+
+    Route::get('/category/{category}', function(Category $category) {
+        return view('category', [
+                'category' => $category
+            ]);
+    });
+
+    Route::get('/task/{task}', function(Task $task) {
+        return view('task', [
+            'task' => $task
+            ]);
+    });
+
+    Route::get('/contests', function() {
+        $contests = Contest::all();
+        return view('contests', [
+            'contests' => $contests
+            ]);
     });
 });

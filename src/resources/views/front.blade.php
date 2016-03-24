@@ -48,7 +48,7 @@
 					</div>
 				</div>
 			@endforeach
-			<a href="" class="btn btn-default">More news</a>
+			<a href="/contests" class="btn btn-default">More news</a>
 		</div>
 		<div class="col-md-3">
 			<div class="panel panel-default">

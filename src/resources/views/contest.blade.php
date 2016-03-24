@@ -11,24 +11,36 @@
 	<div class="row">
 		<div class="col-md-8">
 
-			@forelse ($contest->tasks as $task)
-				<div class="panel panel-default">
-					<div class="panel-heading">{{$task->category->name}}</div>
-					<div class="panel-body">
-						<h3>{{$task->title}}</h3>
-						<p>{{$task->description}}</p>
-						<form>
-							<fieldset class="form-group">
-								<input class="form-control" placeholder="insert flag here">
-							</fieldset>
-						</form>
-					</div>
-				</div>
+			@foreach($categories as $category)
+				
+				<h3>{{$category->name}}</h3>
 
-			@empty
-				<p>Empty contestTasks</p>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>task name</th>
+							<th>solved by</th>
+							<th>action</th>
+						</tr>
+					</thead>
+					<tbody>
+						@forelse ($contest->tasks->where('category_id', $category->id) as $task)
+							<tr>
+								<td>{{$task->id}}</td>
+								<td>{{$task->title}}</td>
+								<td>0</td>
+								<td><a href="/task/{{$task->id}}" class="btn btn-default">solve</a></td>
+							</tr>
 
-			@endforelse
+						@empty
+
+
+						@endforelse
+					</tbody>
+				</table>	
+
+			@endforeach
 
 		</div>
 	</div>
