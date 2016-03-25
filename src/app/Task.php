@@ -12,7 +12,7 @@ class Task extends Model
     }
 
     public function contests() {
-    	return $this->belongsToMany('App\Contest');
+    	return $this->belongsToMany('App\Contest')->withPivot('points', 'start_date', 'end_date');
     }
 
     public function submissions() {

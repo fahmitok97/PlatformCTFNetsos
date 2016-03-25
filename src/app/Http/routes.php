@@ -1,8 +1,12 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Contest;
 use App\Category;
 use App\Task;
+use App\Submission;
+use App\Participation;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,26 +19,6 @@ use App\Task;
 |
 */
 
-// Route::get('/', function () {
-// 	$contests = Contest::all();
-//  	$categories = Category::all();
-//     return view('test', [
-//     	'contests' => $contests,
-//     	'categories' => $categories
-//     ]);
-// });
-
-// Route::get('/contest/{contest}', function(Contest $contest) {
-// 	return view('testcontest', ['contest' => $contest]);
-// });
-
-// Route::get('/category/{category}', function(Category $category) {
-// 	return view('testarchive', ['category' => $category]);
-// });
-
-// Route::get('/login', function() {
-// 	return view('login');
-// });
 
 /*
 |--------------------------------------------------------------------------
@@ -57,33 +41,89 @@ Route::group(['middleware' => ['web']], function () {
     		]);
     });
 
-    Route::get('/contest/{contest}', function(Contest $contest) {
-
-        $category_ids = $contest->tasks->pluck('category_id')->all();
-        $categories =  Category::find($category_ids);
-
-    	return view('contest', [
-    			'contest' => $contest,
-                'categories' => $categories
-    		]);
-    });
-
-    Route::get('/category/{category}', function(Category $category) {
-        return view('category', [
-                'category' => $category
-            ]);
-    });
-
-    Route::get('/task/{task}', function(Task $task) {
-        return view('task', [
-            'task' => $task
-            ]);
-    });
-
-    Route::get('/contests', function() {
+    Route::get('/contest', function() {
         $contests = Contest::all();
         return view('contests', [
             'contests' => $contests
             ]);
     });
+
+    Route::get('/contest/{contest}', function(Contest $contest) {
+        if (Participation::where('user_id', Auth::user()->id)->where('contest_id', $contest->id)->get()->isEmpty())
+            return redirect('/participate/' . $contest->id);
+
+        $category_ids = $contest->tasks->pluck('category_id')->all();
+        $categories =  Category::find($category_ids);
+
+        $users = User::find($contest->participations->pluck('user_id')->all());
+
+        return view('contest', [
+                'contest' => $contest,
+                'categories' => $categories,
+                'users' => $users
+            ]);
+    });
+
+    Route::get('/contest/{contest}/task/{task}', function(Contest $contest, Task $task) {
+        if (Participation::where('user_id', Auth::user()->id)->where('contest_id', $contest->id)->get()->isEmpty())
+            return redirect('/participate/' . $contest->id);
+
+        if(count($contest->tasks->where('id', $task->id))) {
+            return view('task', [
+               'task' => $task,
+               'contest' => $contest
+            ]);
+        } else {
+            return "what are you doing?";
+        }
+    });
+
+    Route::put('/contest/{contest}/task/{task}', function(Contest $contest, Task $task, Request $request) {
+        if (Participation::where('user_id', Auth::user()->id)->where('contest_id', $contest->id)->get()->isEmpty())
+            return redirect('/participate/' . $contest->id);
+
+        if(!count($contest->tasks->where('id', $task->id)))
+            return "what are you doing?";
+
+        $answer = $request->input('answer');
+        $status = ($answer == $task->answer);
+
+        $submission = new Submission;
+        $submission->participation_id = Participation::where('user_id', Auth::user()->id)->where('contest_id', $contest->id)->first()->id;
+        $submission->task_id = $task->id;
+        $submission->submitted_answer = $answer;
+        $submission->status = $status;
+        $submission->save();
+
+        return view('task', [
+           'task' => $task,
+           'contest' => $contest,
+           'status' => $status
+        ]);
+
+    });
+
+    Route::get('/participate/{contest}', 'ParticipationController@create');
+    Route::post('/participate/{contest}', 'ParticipationController@store');
+
+});
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+
+    Route::get('/admin', function() {
+        return view('dashboard.admin.app', [
+                'contests' => Contest::all(),
+                'tasks' => Task::all(),
+                'categories' => Category::all()
+            ]);
+    });
+
+    Route::resource('/admin/category', 'CategoryController');
+    Route::resource('/admin/contest', 'ContestController');
+    Route::resource('/admin/task', 'TaskController');
+    Route::put     ('/admin/contest/{contest}/task', 'ContestController@addTask');
+    Route::delete  ('/admin/contest/{contest}/task/{task}', 'ContestController@deleteTask');
 });

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -17,18 +17,63 @@
 				<p>{{$contests[0] -> description}}</p>
 				<a href="/contest/{{$contests[0]->id}}" class="btn btn-default">Join</a>
 			</div>
+
+            @if (Auth::guest())
 			<div class="col-md-4">
 				<h3>Login</h3>
-				<form action="">
-					<div class="form-group">
-						<input type="text" name="username" placeholder="username" class="form-control">
-					</div>
-					<div class="form-group">
-						<input type="password" name="password" placeholder="password" class="form-control">
-					</div>
-					<button type="submit" class="btn btn-default form-control">Submit</button>
-				</form>
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                        {!! csrf_field() !!}
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="col-md-12">
+                                <input placeholder="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <div class="col-md-12">
+                                <input placeholder="password" type="password" class="form-control" name="password">
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember"> Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-sign-in"></i>Login
+                                </button>
+
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                            </div>
+                        </div>
+                    </form>
 			</div>
+            @else
+            <div class="col-md-4">
+            	<h2>Hello, {{Auth::user()->fullname}}</h2>
+            </div>
+            @endif
 		</div>
 	</div>
 </div>
@@ -48,7 +93,7 @@
 					</div>
 				</div>
 			@endforeach
-			<a href="/contests" class="btn btn-default">More news</a>
+			<a href="/contest" class="btn btn-default">More news</a>
 		</div>
 		<div class="col-md-3">
 			<div class="panel panel-default">
