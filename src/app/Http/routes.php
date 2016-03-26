@@ -36,6 +36,13 @@ Route::group(['middleware' => ['web']], function () {
    	  	$categories = Category::all();
    	  	$contests = Contest::limit(2)->get();
         $users = User::all();
+
+        foreach ($users as $user) {
+            $user->total_score = $user->getTotalScore();
+        }
+
+        $users = $users->sortByDesc('total_score');
+
     	return view('front', [
     			'categories' => $categories,
     			'contests' => $contests,
