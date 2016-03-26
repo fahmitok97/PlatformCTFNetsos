@@ -122,8 +122,8 @@ class ContestController extends Controller
     {
         $taskId = $request->input('task-id');
         $points = $request->input('task-points');
-        if(count($contest->tasks->where('id', $taskId))) {
-            $task = $contest->tasks->where('id', $taskId)->first();
+        if($contest->tasks->where('id', intval($taskId))->count()) {
+            $task = $contest->tasks->where('id', intval($taskId))->first();
             $task->pivot->points = $points;
             $task->pivot->save();
         } else {

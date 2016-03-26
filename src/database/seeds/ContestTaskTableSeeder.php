@@ -30,7 +30,7 @@ class ContestTaskTableSeeder extends Seeder
         ]);
 
         DB::table('contest_task')->insert([
-            'contest_id' => 1,
+            'contest_id' => 2,
             'task_id' => 4,
             'points' => 200,
         ]);

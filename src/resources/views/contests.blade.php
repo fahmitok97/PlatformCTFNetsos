@@ -16,7 +16,14 @@
 					<div class="panel-heading">{{$contest->name}}</div>
 					<div class="panel-body">
 						<p> {{$contest->description}} </p>
-						<a href="/contest/{{$contest->id}}" class="btn btn-default">join</a>
+						<p> {{$contest->start_date}} - {{$contest->end_date}} </p>
+						<p> participants: {{$contest->participations->count()}} </p>
+
+						@if(Auth::check() && Auth::user()->isParticipate($contest))
+							<a href="/contest/{{$contest->id}}" class="btn btn-success">continue</a>
+						@else
+							<a href="/contest/{{$contest->id}}" class="btn btn-default">join</a>
+						@endif
 					</div>
 				</div>
 			@endforeach

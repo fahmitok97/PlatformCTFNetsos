@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-	<h1>{{$contest->title}}</h1>
+	<h1>{{$contest->name}}</h1>
 	<h4>{{$contest->description}}</h4>
 
 	<br>
@@ -28,9 +28,20 @@
 						@forelse ($contest->tasks->where('category_id', $category->id) as $task)
 							<tr>
 								<td>{{$task->id}}</td>
-								<td>{{$task->title}}</td>
-								<td>0</td>
-								<td><a href="/contest/{{$contest->id}}/task/{{$task->id}}" class="btn btn-default">solve</a></td>
+								<td>
+									<a href="{{'/contest/' . $contest->id . '/task/' . $task->id}}">
+										{{$task->title}}
+									</a>
+									@if(Auth::user()->hasSolved($task))
+										<span class="label label-success">solved</span>
+									@else
+										<span class="label label-default">not solved</span>
+									@endif
+								</td>
+								<td>{{count($task->getCorrectSubmissions($contest))}}</td>
+								<td>
+									<a href="/contest/{{$contest->id}}/task/{{$task->id}}" class="btn btn-default">solve</a>
+								</td>
 							</tr>
 
 						@empty
@@ -53,16 +64,14 @@
                                 <th>#</th>
                                 <th>username</th>
                                 <th>points</th>
-                                <th>action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $index => $user)
                             <tr>
                                 <td>{{$index}}</td>
-                                <td>{{$user->fullname}}</td>
+                                <td><a href="/user/{{$user->id}}">{{$user->username}}</a></td>
                                 <td>{{$user->score($contest)}}</td>
-                                <td><a href="#" class="btn btn-default">do nothing</a></td>
                             </tr>
                             @endforeach
                         </tbody>

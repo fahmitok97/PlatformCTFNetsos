@@ -24,4 +24,12 @@ class Contest extends Model
         return $this->hasManyThrough('App\Submission', 'App\Participation');
     }
 
+    public function getParticipants() {
+        return User::find($this->participations->pluck('user_id')->all());
+    }
+
+    public function getCorrectSubmissions() {
+        return $this->submissions->where('status', 1)->all();
+    }
+
 }

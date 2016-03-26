@@ -16,5 +16,9 @@ class Submission extends Model
     	return $this->belongsTo('App\Task');
     }
 
+    public function getUser(){
+    	return $this->participation->user;
+    }
+
 
 }

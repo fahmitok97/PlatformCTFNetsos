@@ -15,7 +15,11 @@
 			<div class="col-md-8">
 				<h2>{{$contests[0] -> name}}</h2>
 				<p>{{$contests[0] -> description}}</p>
-				<a href="/contest/{{$contests[0]->id}}" class="btn btn-default">Join</a>
+				@if(Auth::check() && Auth::user()->isParticipate($contests[0]))
+					<a href="/contest/{{$contests[0]->id}}" class="btn btn-success">continue</a>
+				@else
+					<a href="/contest/{{$contests[0]->id}}" class="btn btn-default">join</a>
+				@endif
 			</div>
 
             @if (Auth::guest())
@@ -89,7 +93,11 @@
 					<div class="panel-heading">{{$contest->name}}</div>
 					<div class="panel-body">
 						<p> {{$contest->description}} </p>
-						<a href="/contest/{{$contest->id}}" class="btn btn-default">join</a>
+						@if(Auth::check() && Auth::user()->isParticipate($contest))
+							<a href="/contest/{{$contest->id}}" class="btn btn-success">continue</a>
+						@else
+							<a href="/contest/{{$contest->id}}" class="btn btn-default">join</a>
+						@endif
 					</div>
 				</div>
 			@endforeach
@@ -105,17 +113,17 @@
 						<tr>
 							<th>#</th>
 							<th>username</th>
-							<th>score</th>
+							<th>points</th>
 						</tr>
 					</thead>
 					<tbody>
-						@for ($i = 0; $i < 10; $i++)
+						@foreach($contests[0]->participations as $i=>$participation)
 						<tr>
 							<td>{{$i}}</td>
-							<td>Adam</td>
-							<td>100</td>
+							<td>{{$participation->user->username}}</td>
+							<td>{{$participation->user->final_score}}</td>
 						</tr>
-						@endfor
+						@endforeach
 					</tbody>
 				</table>				
 			</div>
@@ -135,13 +143,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							@for ($i = 0; $i < 10; $i++)
+							@foreach($users as $i=>$user)
 							<tr>
 								<td>{{$i}}</td>
-								<td>Adam</td>
-								<td>100</td>
+								<td>{{$user->username}}</td>
+								<td>{{$user->getTotalScore()}}</td>
 							</tr>
-							@endfor
+							@endforeach
 						</tbody>
 					</table>
 				</div>
@@ -165,7 +173,7 @@
 							<h3>{{$category->name}}</h3>
 							<img src="variants-path.svg" alt="" width="150px"><br>
 							<p>{{$category->description}}</p>
-							<a class="btn btn-default" href="category/{{$category->id}}">Solve</a>
+							<a class="btn btn-default" href="#">Solve</a>
 						</div>
 					</div>
 				</div>

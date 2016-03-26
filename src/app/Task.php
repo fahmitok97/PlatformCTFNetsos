@@ -22,4 +22,8 @@ class Task extends Model
     public function hints() {
     	return $this->hasMany('App\Hint');
     }
+
+    public function getCorrectSubmissions(Contest $contest) {
+        return $contest->submissions->where('status', 1)->where('task_id', $this->id)->all();
+    }
 }

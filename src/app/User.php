@@ -13,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
 	protected $fillable = [
-    	'fullname', 'email', 'password'
+    	'username', 'fullname', 'email', 'password'
     ];
 
     /**
@@ -30,6 +30,10 @@ class User extends Authenticatable
     	return $this->hasMany('App\Participation');
     }
 
+    public function submissions() {
+        return $this->hasManyThrough('App\Submission', 'App\Participation');
+    }
+
     public function score(Contest $contest) {
         $participation = Participation::where('user_id', $this->id)
                                         ->where('contest_id', $contest->id)
@@ -42,6 +46,23 @@ class User extends Authenticatable
             $total += $t->pivot->points;
         }
         return $total;
+    }
+
+    public function isParticipate(Contest $contest) {
+        $participated = $this->participations->pluck('contest_id');
+        return $participated->contains($contest->id);
+    }
+
+    public function hasSolved(Task $task) {
+        return $this->submissions->where('status', 1)->where('task_id', $task->id)->count();
+    }
+
+    public function getTotalScore(){
+        return -1;
+    }
+
+    public function isAdmin() {
+        return $this->type === 1;
     }
 
 }

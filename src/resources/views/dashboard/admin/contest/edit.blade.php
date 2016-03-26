@@ -46,7 +46,10 @@
                             <tr>
                                 <td>Total Submission</td>
                                 <td>{{$contest->submissions->count()}}</td>
-                            </tr>
+                            <tr>
+                                <td>Total correct submissions</td>
+                                <td>{{count($contest->getCorrectSubmissions())}}</td>
+                            </tr>                            </tr>
                             <tr>
                                 <td>Tasks</td>
                                 <td>{{$contest->tasks()->count()}}</td>
@@ -146,8 +149,16 @@
                             <tr>
                                 <td>{{$submission->id}}</td>
                                 <td>{{$submission->added_time}}</td>
-                                <td>{{$submission->participation->user->fullname}}</td>
-                                <td>{{$submission->task->title}}</td>
+                                <td>
+                                    <a href="{{'/user/' . $submission->participation->user->id}}">
+                                        {{$submission->participation->user->username}}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{'/contest/' . $contest->id . '/task/' . $submission->task->id}}">
+                                    {{$submission->task->title}}
+                                    </a>
+                                </td>
                                 <td>{{$submission->submitted_answer}}</td>
                                 <td>{{$submission->status}}</td>
                                 <td>
@@ -179,7 +190,7 @@
                             @foreach ($users as $index => $user)
                             <tr>
                                 <td>{{$index}}</td>
-                                <td>{{$user->fullname}}</td>
+                                <td><a href="{{'/user/' . $user->id}}">{{$user->username}}</a></td>
                                 <td>{{$user->score($contest)}}</td>
                                 <td><a href="#" class="btn btn-default">do nothing</a></td>
                             </tr>

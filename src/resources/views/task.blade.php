@@ -4,7 +4,9 @@
 
 <div class="container">
 
-	<h1>{{$contest->name}}</h1>
+	<h1>
+	<a href="/contest/{{$contest->id}}"><i class="fa fa-arrow-left"></i>  {{$contest->name}}</a>
+	</h1>
 	<h4>{{$contest->description}}</h4>
 
 	<br>
@@ -40,6 +42,37 @@
 				</div>
 			</div>
 
+		</div>
+
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">Solved by</div>
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<th>#</th>
+							<th>time</th>
+							<th>username</th>
+						</thead>
+						<tbody>
+							<?php $index = 0 ?>
+							@foreach ($task->getCorrectSubmissions($contest) as $submission)
+								<?php $index++ ?>
+								<tr>
+									<td>{{$index}}</td>
+									<td>{{$submission->added_time}}</td>
+									<td>
+										{{$submission->getUser()->username}}
+										@if ($index <= 3)
+											<span class="label label-success">{{$index}}</span>
+										@endif
+									</td>
+								</tr>
+							@endforeach							
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 

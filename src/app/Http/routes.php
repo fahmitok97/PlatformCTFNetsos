@@ -34,10 +34,12 @@ use App\User;
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', function() {
    	  	$categories = Category::all();
-   	  	$contests = Contest::all();
+   	  	$contests = Contest::limit(2)->get();
+        $users = User::all();
     	return view('front', [
     			'categories' => $categories,
-    			'contests' => $contests
+    			'contests' => $contests,
+                'users' => $users
     		]);
     });
 
@@ -106,12 +108,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/participate/{contest}', 'ParticipationController@create');
     Route::post('/participate/{contest}', 'ParticipationController@store');
 
-});
+    Route::get('/user/{user}', 'UserController@show');
 
-Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
+
+});
+
+Route::group(['middleware' => ['web', 'admin']], function () {
 
     Route::get('/admin', function() {
         return view('dashboard.admin.app', [

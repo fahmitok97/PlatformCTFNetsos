@@ -10,16 +10,21 @@
 	<br>
 
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-4 col-md-offset-4">
 
 			<div class="panel panel-default">
+				<div class="panel-heading">confirm participation</div>
 				<div class="panel-body">
-					Participate?
+					<p>Participate?</p>
+	
 					<form action="/participate/{{$contest->id}}" method="POST">
                         {!! csrf_field() !!}
-						<button type="submit" class="btn btn-default">Participate</button>
+						<button type="submit" class="form-control btn btn-default">Participate</button>
 					</form>
-					<a href="/contests" class="btn btn-default">Return</a>
+					<br>
+					<a href="/contests" class="form-control btn btn-default">Return</a>
+					</div>
+
 				</div>
 			</div>
 
