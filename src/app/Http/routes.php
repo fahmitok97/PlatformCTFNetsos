@@ -58,6 +58,12 @@ Route::group(['middleware' => ['web']], function () {
         $categories =  Category::find($category_ids);
 
         $users = User::find($contest->participations->pluck('user_id')->all());
+        
+        foreach ($users as $user) {
+            $user->score = $user->score($contest);
+        }
+
+        $users = $users->sortByDesc('score');
 
         return view('contest', [
                 'contest' => $contest,
