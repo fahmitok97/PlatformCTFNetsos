@@ -58,7 +58,14 @@ class User extends Authenticatable
     }
 
     public function getTotalScore(){
-        return -1;
+        $total = 0;
+        $participations = Participation::where('user_id', $this->id)->get();
+
+        foreach ($participations as $participation) {
+            $total += $this->score(Contest::find($participation->contest_id));
+        }
+
+        return $total;
     }
 
     public function isAdmin() {
