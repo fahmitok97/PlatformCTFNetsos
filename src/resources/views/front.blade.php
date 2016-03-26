@@ -86,7 +86,7 @@
 	
 	<div class="row">
 		<div class="col-md-6">
-			news
+			<h3>News</h3>
 
 			@foreach ($contests as $contest)
 				<div class="panel panel-default">

@@ -57,6 +57,18 @@ Route::group(['middleware' => ['web']], function () {
             ]);
     });
 
+    Route::get('/user/{user}', 'UserController@show');
+
+    Route::auth();
+
+});
+
+Route::group(['middleware' => ['web', 'auth']], function() {
+
+    Route::get('/participate/{contest}', 'ParticipationController@create');
+
+    Route::post('/participate/{contest}', 'ParticipationController@store');
+
     Route::get('/contest/{contest}', function(Contest $contest) {
         if (Participation::where('user_id', Auth::user()->id)->where('contest_id', $contest->id)->get()->isEmpty())
             return redirect('/participate/' . $contest->id);
@@ -118,18 +130,9 @@ Route::group(['middleware' => ['web']], function () {
 
     });
 
-    Route::get('/participate/{contest}', 'ParticipationController@create');
-    Route::post('/participate/{contest}', 'ParticipationController@store');
-
-    Route::get('/user/{user}', 'UserController@show');
-
-    Route::auth();
-
-    Route::get('/home', 'HomeController@index');
-
 });
 
-Route::group(['middleware' => ['web', 'admin']], function () {
+Route::group(['middleware' => ['web', 'auth', 'admin']], function () {
 
     Route::get('/admin', function() {
         return view('dashboard.admin.app', [
