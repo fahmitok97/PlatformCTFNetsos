@@ -62,7 +62,7 @@ class User extends Authenticatable
         $participations = Participation::where('user_id', $this->id)->get();
 
         foreach ($participations as $participation) {
-            $total += $this->score(Contest::find($participation->contest_id));
+            $total += $this->score($participation->contest);
         }
 
         return $total;
