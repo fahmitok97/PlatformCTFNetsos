@@ -20,7 +20,8 @@
 						<tr>
 							<th>#</th>
 							<th>task name</th>
-							<th>solved by</th>
+							<th>total solve</th>
+							<th>score</th>
 							<th>action</th>
 						</tr>
 					</thead>
@@ -39,6 +40,7 @@
 									@endif
 								</td>
 								<td>{{count($task->getCorrectSubmissions($contest))}}</td>
+								<td>{{$task->pivot->points}}</td>
 								<td>
 									<a href="/contest/{{$contest->id}}/task/{{$task->id}}" class="btn btn-default">solve</a>
 								</td>

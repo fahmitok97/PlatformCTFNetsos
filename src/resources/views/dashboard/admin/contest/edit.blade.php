@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-4">
 
             <div class="panel panel-default">
                 <div class="panel-heading">Edit Contest</div>
@@ -33,7 +33,7 @@
 
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">Contest Statistic</div>
                 <div class="panel-body">
@@ -64,7 +64,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">Tasks</div>
                 <div class="panel-body">
@@ -128,7 +128,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">Submissions</div>
                 <div class="panel-body">

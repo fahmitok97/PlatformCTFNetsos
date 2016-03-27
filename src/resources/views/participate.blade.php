@@ -22,7 +22,7 @@
 						<button type="submit" class="form-control btn btn-default">Participate</button>
 					</form>
 					<br>
-					<a href="/contests" class="form-control btn btn-default">Return</a>
+					<a href="{{ url('/contest') }}" class="form-control btn btn-default">Return</a>
 					</div>
 
 				</div>

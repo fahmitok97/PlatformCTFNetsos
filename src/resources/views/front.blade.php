@@ -6,19 +6,19 @@
 	<div class="container small-container">
 		
 		<div class="row">
-			<h2 class="text-center">Learn to code interactively, for free.</h2>
+			<h2 class="text-center">Learn to pwn interactively, for free.</h2>
 		</div>
-		
+
 		<br><br><br>
 
 		<div class="row">
 			<div class="col-md-8">
-				<h2>{{$contests[0] -> name}}</h2>
+				<h1>{{$contests[0] -> name}}</h1>
 				<p>{{$contests[0] -> description}}</p>
 				@if(Auth::check() && Auth::user()->isParticipate($contests[0]))
-					<a href="/contest/{{$contests[0]->id}}" class="btn btn-success">continue</a>
+					<a href="/contest/{{$contests[0]->id}}" class="btn btn-success btn-lg">continue</a>
 				@else
-					<a href="/contest/{{$contests[0]->id}}" class="btn btn-default">join</a>
+					<a href="/contest/{{$contests[0]->id}}" class="btn btn-default btn-lg">join</a>
 				@endif
 			</div>
 
@@ -104,10 +104,8 @@
 			<a href="/contest" class="btn btn-default">More news</a>
 		</div>
 		<div class="col-md-3">
+			<h3>Last week's Leaderboard</h3>
 			<div class="panel panel-default">
-				<div class="panel-heading">Last week's Leaderboard</div>
-
-				<!-- Table -->
 				<table class="table table-condensed">
 					<thead>
 						<tr>
@@ -130,29 +128,26 @@
 			<a href="" class="btn btn-default">full leaderboard</a>
 		</div>
 		<div class="col-md-3">
+			<h3>All time Leaderboard</h3>
 			<div class="panel panel-default">
-				<div class="panel-heading">All time Leaderboard</div>
-
-					<!-- Table -->
-					<table class="table table-condensed">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>username</th>
-								<th>score</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($users as $i=>$user)
-							<tr>
-								<td>{{$i}}</td>
-								<td>{{$user->username}}</td>
-								<td>{{$user->getTotalScore()}}</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
+				<table class="table table-condensed">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>username</th>
+							<th>score</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($users as $user)
+						<tr>
+							<td>{{$i}}</td>
+							<td>{{$user->username}}</td>
+							<td>{{$user->getTotalScore()}}</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
 			</div>
 			<a href="" class="btn btn-default">full leaderboard</a>
 		</div>
