@@ -2,20 +2,21 @@
 
 @section('content')
 
-<div class="container">
+<br><br><br><br>
+<div class="ui container">
 	<h1>{{$contest->name}}</h1>
 	<h4>{{$contest->description}}</h4>
 
 	<br>
 
-	<div class="row">
-		<div class="col-md-8">
+	<div class="ui grid">
+		<div class="twelve wide column">
 
 			@foreach($categories as $category)
 				
 				<h3>{{$category->name}}</h3>
 
-				<table class="table">
+				<table class="ui table">
 					<thead>
 						<tr>
 							<th>#</th>
@@ -34,15 +35,13 @@
 										{{$task->title}}
 									</a>
 									@if(Auth::user()->hasSolved($task))
-										<span class="label label-success">solved</span>
-									@else
-										<span class="label label-default">not solved</span>
+										<span class="ui teal tag label">solved</span>
 									@endif
 								</td>
 								<td>{{count($task->getSolver($contest))}}</td>
 								<td>{{$task->pivot->points}}</td>
 								<td>
-									<a href="/contest/{{$contest->id}}/task/{{$task->id}}" class="btn btn-default">solve</a>
+									<a href="/contest/{{$contest->id}}/task/{{$task->id}}" class="ui button">solve</a>
 								</td>
 							</tr>
 
@@ -56,7 +55,7 @@
 			@endforeach
 
 		</div>
-		<div class="col-md-4">
+		<div class="four wide column">
 			@include('partials.scoreboard', ['data' => $contest->getScoreBoardData()])
 		</div>
 

@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
+<br><br><br><br>
+<div class="ui container">
+    <div class="ui grid">
+        <div class="sixteen wide column">
 
-            <div class="panel panel-default">
+            <div class="ui segment">
                 <div class="panel-heading">Contests</div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-10">
-                            <table class="table table-condensed">
+                            <table class="ui table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -26,27 +26,27 @@
                                         <td>{{$contest->id}}</td>
                                         <td>{{$contest->name}}</td>
                                         <td>{{$contest->description}}</td>
-                                        <td><a href="/admin/contest/{{$contest->id}}/edit" class="btn btn-default">edit</a></td>
+                                        <td><a href="/admin/contest/{{$contest->id}}/edit" class="ui button">edit</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>                
                         </div>
                         <div class="col-md-2">
-                            <a href="/admin/contest" class="btn btn-default">see more list</a>
-                            <a href="/admin/contest/create" class="btn btn-default">create new contest</a>
+                            <a href="/admin/contest" class="ui button">see more list</a>
+                            <a href="/admin/contest/create" class="ui button">create new contest</a>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="ten wide column">
 
-            <div class="panel panel-default">
+            <div class="ui segment">
                 <div class="panel-heading">Tasks</div>
                 <div class="panel-body">
-                    <table class="table table-condensed">
+                    <table class="ui table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -65,24 +65,24 @@
                                 <td>{{$task->description}}</td>
                                 <td>{{$task->category->name}}</td>
                                 <td>{{$task->default_points}}</td>
-                                <td><a href="/admin/task/{{$task->id}}/edit" class="btn btn-default">edit</a></td>
+                                <td><a href="/admin/task/{{$task->id}}/edit" class="ui button">edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>                
 
 
-                    <a href="/admin/task" class="btn btn-default">see more list</a>
-                    <a href="/admin/task/create" class="btn btn-default">create new task</a>
+                    <a href="/admin/task" class="ui button">see more list</a>
+                    <a href="/admin/task/create" class="ui button">create new task</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="six wide column">
 
-            <div class="panel panel-default">
+            <div class="ui segment">
                 <div class="panel-heading">Categories</div>
                 <div class="panel-body">
-                    <table class="table table-condensed">
+                    <table class="ui table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -97,15 +97,15 @@
                                 <td>{{$category->id}}</td>
                                 <td>{{$category->name}}</td>
                                 <td>{{$category->description}}</td>
-                                <td><a href="/admin/category/{{$category->id}}/edit" class="btn btn-default">edit</a></td>
+                                <td><a href="/admin/category/{{$category->id}}/edit" class="ui button">edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>                
 
 
-                    <a href="/admin/category" class="btn btn-default">see more list</a>
-                    <a href="/admin/contest/create" class="btn btn-default">create new contest</a>
+                    <a href="/admin/category" class="ui button">see more list</a>
+                    <a href="/admin/contest/create" class="ui button">create new contest</a>
 
                 </div>
             </div>

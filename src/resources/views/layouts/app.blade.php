@@ -24,65 +24,170 @@
             margin-right: 6px;
         }
     </style>
+
+    <style type="text/css">
+
+        .masthead.segment.inverted {
+            background-color: #39424e;
+        }
+        .masthead.segment {
+          min-height: 100vh;
+          padding: 1em 0em;
+        }
+        .masthead .logo.item img {
+          margin-right: 1em;
+        }
+        .masthead .ui.menu .ui.button {
+          margin-left: 0.5em;
+        }
+        .masthead h1.ui.header {
+          margin-bottom: 0em;
+          font-size: 4em;
+          font-weight: normal;
+        }
+        .masthead h2 {
+          font-size: 1.7em;
+          font-weight: normal;
+        }
+
+        .ui.vertical.stripe {
+          padding: 8em 0em;
+        }
+        .ui.vertical.stripe h3 {
+          font-size: 2em;
+        }
+        .ui.vertical.stripe .button + h3,
+        .ui.vertical.stripe p + h3 {
+          margin-top: 3em;
+        }
+        .ui.vertical.stripe .floated.image {
+          clear: both;
+        }
+        .ui.vertical.stripe p {
+          font-size: 1.33em;
+        }
+        .ui.vertical.stripe .horizontal.divider {
+          margin: 3em 0em;
+        }
+
+        .quote.stripe.segment {
+          padding: 0em;
+        }
+        .quote.stripe.segment .grid .column {
+          padding-top: 5em;
+          padding-bottom: 5em;
+        }
+
+        .footer.segment {
+          padding: 5em 0em;
+        }
+
+        .secondary.pointing.menu .toc.item {
+          display: none;
+        }
+
+        .ui.secondary.inverted.pointing.menu {
+            border-width: 0px;
+        }
+
+        @media only screen and (max-width: 700px) {
+          .ui.fixed.menu {
+            display: none !important;
+          }
+          .secondary.pointing.menu .item,
+          .secondary.pointing.menu .menu {
+            display: none;
+          }
+          .secondary.pointing.menu .toc.item {
+            display: block;
+          }
+          .masthead.segment {
+            min-height: 350px;
+          }
+          .masthead h1.ui.header {
+            font-size: 2em;
+            margin-top: 1.5em;
+          }
+          .masthead h2 {
+            margin-top: 0.5em;
+            font-size: 1.5em;
+          }
+        }
+
+        .inverted.custom {
+            background-color: #39424e !important;
+        }
+
+    </style>
+
 </head>
-<body id="app-layout">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
+<body>
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+<!-- Following Menu -->
+<div class="ui large top fixed hidden menu">
+    <div class="ui container">
+        <a class="active item" href="{{ url('/') }}">Home</a>
+        <a class="item" href="{{ url('/contest') }}">Contest</a>
+        <a class="item" href="{{ url('/') }}">Archive</a>
+        <a class="item" href="{{ url('/') }}">Leaderboard</a>
+        <a class="item" href="{{ url('/') }}">About</a>
+        @if (Auth::check() && Auth::user()->isAdmin())
+            <a class="item" href="{{ url('/admin') }}">Admin</a>
+        @endif
 
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    CTF
-                </a>
-            </div>
+        <div class="right menu">
+            <!-- Authentication Links -->
+            @if (Auth::guest())
+                <div class="item">
+                    <a href="{{ url('/login') }}" class="ui button">Log in</a>
+                </div>
+                <div class="item">
+                    <a href="{{ url('/register') }}" class="ui primary button">Sign Up</a>
+                </div>
+            @else
+                <div class="ui simple dropdown item">
+                    {{ Auth::user()->username }} <i class="dropdown icon"></i>
+                    <div class="menu">
+                            <a href="{{ url('/user/' . Auth::user()->id) }}" class="item">Profile</a>
+                            <a href="{{ url('/logout') }}" class="item">Log out</a>
+                    </div>
+                </div>
+            @endif
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="{{ url('/contest') }}">Contests</a></li>  
-                    <li><a href="{{ url('/') }}">Archive</a></li>  
-                    <li><a href="{{ url('/') }}">About</a></li>  
-                    @if (Auth::check() && Auth::user()->isAdmin())
-                        <li><a href="{{ url('/admin') }}">Admin</a></li>  
-                    @endif
-
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->username }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-            </div>
         </div>
-    </nav>
 
-    @yield('content')
+    </div>
+</div>
+
+<!-- Sidebar Menu -->
+<div class="ui vertical inverted sidebar menu">
+    <a class="active item">Home</a>
+    <a class="item">Contest</a>
+    <a class="item">Archive</a>
+    <a class="item">Leaderboard</a>
+    <a class="item">About</a>
+    <a class="item">Login</a>
+    <a class="item">Signup</a>
+</div>
+
+
+<!-- Page Contents -->
+<div class="pusher">
+      @yield('content')
+</div>
 
     <!-- JavaScripts -->
     <script src="js/app.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+    <script>
+        $(document).ready(function() {
+            // create sidebar and attach to menu open
+            $('.ui.sidebar').sidebar('attach events', '.toc.item');
+        });
+    </script>
+
+    @yield('tail')
+
 </body>
 </html>

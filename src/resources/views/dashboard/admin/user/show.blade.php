@@ -1,59 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-<br>
-<div class="container">
+<br><br><br><br>
+<div class="ui container">
 
-    <h1>User Information</h1>
+    <h1 class="ui header">User Information</h1>
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">User information</div>
-                <div class="panel-body">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>username</td>
-                                <td>{{$user->username}}</td>
-                            </tr>
-                            <tr>
-                                <td>fullname</td>
-                                <td>{{$user->fullname}}</td>
-                            </tr>
-                            <tr>
-                                <td>email</td>
-                                <td>{{$user->email}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div class="ui grid">
+        <div class="six wide column">
+            <div class="ui segment">
+                <h3 class="ui header">User information</h3>
+                <table class="ui table">
+                    <tbody>
+                        <tr>
+                            <td>username</td>
+                            <td>{{$user->username}}</td>
+                        </tr>
+                        <tr>
+                            <td>fullname</td>
+                            <td>{{$user->fullname}}</td>
+                        </tr>
+                        <tr>
+                            <td>email</td>
+                            <td>{{$user->email}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">Participations</div>
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                            <th>#</th>
-                            <th>contest name</th>
-                            <th>position</th>
-                            <th>points</th>
-                        </thead>
-                        <tbody>
-                            @foreach($user->participations as $participation)
-                                <tr>
-                                    <td>{{ $participation->id }}</td>
-                                    <td>{{ $participation->contest->name }}</td>
-                                    <td>{{ $participation->final_position }}</td>
-                                    <td>{{ $participation->final_points }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+        <div class="ten wide column">
+            <div class="ui segment">
+                <h1 class="ui header">Participations</h1>
+                <table class="ui table">
+                    <thead>
+                        <th>#</th>
+                        <th>contest name</th>
+                        <th>position</th>
+                        <th>points</th>
+                    </thead>
+                    <tbody>
+                        @foreach($user->participations as $participation)
+                            <tr>
+                                <td>{{ $participation->id }}</td>
+                                <td>{{ $participation->contest->name }}</td>
+                                <td>{{ $participation->final_position }}</td>
+                                <td>{{ $participation->final_points }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
 
