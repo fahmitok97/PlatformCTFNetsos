@@ -57,29 +57,7 @@
 
 		</div>
 		<div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">scoreboard</div>
-                <div class="panel-body">
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>username</th>
-                                <th>points</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($users as $index => $user)
-                            <tr>
-                                <td>{{$index}}</td>
-                                <td><a href="/user/{{$user->id}}">{{$user->username}}</a></td>
-                                <td>{{$user->score($contest)}}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>            
-                </div>
-            </div>
+			@include('partials.scoreboard', ['data' => $contest->getScoreBoardData()])
 		</div>
 
 	</div>

@@ -32,4 +32,26 @@ class Contest extends Model
         return $this->submissions->where('status', 1)->all();
     }
 
+    /**
+     * return array of objects with three attributes: position, user, points
+     */
+    public function getScoreBoardData() {
+        $participations = $this->participations;
+        foreach ($participations as $p) {
+            $p->final_points = $p->user->score($this);
+        }
+        $participations = $participations->sortByDesc('final_points');
+
+        $i = 1;
+        foreach ($participations as $p) {
+            $p->position = $i++;
+        }
+
+        return $participations;
+    }
+
+    public function getFinalScoreBoardData() {
+        return $this->participations->sortByDesc('final_position');
+    }
+
 }

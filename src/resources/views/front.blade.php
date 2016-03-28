@@ -105,26 +105,7 @@
 		</div>
 		<div class="col-md-3">
 			<h3>Last week's Leaderboard</h3>
-			<div class="panel panel-default">
-				<table class="table table-condensed">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>username</th>
-							<th>points</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($contests[0]->participations as $i=>$participation)
-						<tr>
-							<td>{{$i}}</td>
-							<td>{{$participation->user->username}}</td>
-							<td>{{$participation->user->final_score}}</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>				
-			</div>
+			@include('partials.scoreboard', ['data' => $contests[0]->getFinalScoreBoardData()])
 			<a href="" class="btn btn-default">full leaderboard</a>
 		</div>
 		<div class="col-md-3">
@@ -141,7 +122,7 @@
 					<tbody>
 						@foreach($users as $user)
 						<tr>
-							<td>{{$i}}</td>
+							<td>{{0}}</td>
 							<td>{{$user->username}}</td>
 							<td>{{$user->getTotalScore()}}</td>
 						</tr>
