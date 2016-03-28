@@ -23,7 +23,12 @@ class Task extends Model
     	return $this->hasMany('App\Hint');
     }
 
-    public function getCorrectSubmissions(Contest $contest) {
-        return $contest->submissions->where('status', 1)->where('task_id', $this->id)->all();
+    public function getSolver(Contest $contest) {
+        return Submission::whereIn('participation_id', $contest->participations->pluck('id'))
+            ->where('status', 1)
+            ->where('task_id', $this->id)
+            ->orderBy('status', 'asc')
+            ->groupBy('participation_id')
+            ->get();
     }
 }

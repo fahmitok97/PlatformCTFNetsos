@@ -44,7 +44,7 @@ class Contest extends Model
 
         $i = 1;
         foreach ($participations as $p) {
-            $p->position = $i++;
+            $p->final_position = $i++;
         }
 
         return $participations;

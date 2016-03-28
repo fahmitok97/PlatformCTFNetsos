@@ -56,13 +56,13 @@
 						</thead>
 						<tbody>
 							<?php $index = 0 ?>
-							@foreach ($task->getCorrectSubmissions($contest) as $submission)
+							@foreach ($task->getSolver($contest) as $solver)
 								<?php $index++ ?>
 								<tr>
 									<td>{{$index}}</td>
-									<td>{{$submission->added_time}}</td>
+									<td>{{$solver->added_time}}</td>
 									<td>
-										{{$submission->getUser()->username}}
+										{{$solver->getUser()->username}}
 										@if ($index <= 3)
 											<span class="label label-success">{{$index}}</span>
 										@endif

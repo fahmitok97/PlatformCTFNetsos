@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 use App\Contest;
 use App\Category;
 use App\Task;
@@ -107,10 +109,12 @@ Route::group(['middleware' => ['web', 'auth']], function() {
         $status = ($answer == $task->answer);
 
         $submission = new Submission;
-        $submission->participation_id = Participation::where('user_id', Auth::user()->id)->where('contest_id', $contest->id)->first()->id;
+        $submission->participation_id = Participation::where('user_id', Auth::user()->id)
+                                        ->where('contest_id', $contest->id)->first()->id;
         $submission->task_id = $task->id;
         $submission->submitted_answer = $answer;
         $submission->status = $status;
+        $submission->added_time = Carbon::now();
         $submission->save();
 
         return view('task', [

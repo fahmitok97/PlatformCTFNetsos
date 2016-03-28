@@ -52,7 +52,7 @@ class ContestController extends Controller
         $contest->description = $request->input('description');
         $contest->save();
 
-        return redirect('contest/' . $contest->id . '/edit');
+        return redirect('admin/contest/' . $contest->id . '/edit');
     }
 
     /**

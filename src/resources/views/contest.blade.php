@@ -39,7 +39,7 @@
 										<span class="label label-default">not solved</span>
 									@endif
 								</td>
-								<td>{{count($task->getCorrectSubmissions($contest))}}</td>
+								<td>{{count($task->getSolver($contest))}}</td>
 								<td>{{$task->pivot->points}}</td>
 								<td>
 									<a href="/contest/{{$contest->id}}/task/{{$task->id}}" class="btn btn-default">solve</a>
