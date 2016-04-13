@@ -7,7 +7,7 @@
         <div class="sixteen wide column">
 
             <div class="ui segment">
-                <div class="panel-heading">Contests</div>
+                <div class="ui header">Contests</div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-10">
@@ -17,6 +17,9 @@
                                         <th>#</th>
                                         <th>name</th>
                                         <th>description</th>
+                                        <th>start time</th>
+                                        <th>end time</th>
+                                        <th>status</th>
                                         <th>action</th>
                                     </tr>
                                 </thead>
@@ -26,7 +29,10 @@
                                         <td>{{$contest->id}}</td>
                                         <td>{{$contest->name}}</td>
                                         <td>{{$contest->description}}</td>
-                                        <td><a href="/admin/contest/{{$contest->id}}/edit" class="ui button">edit</a></td>
+                                        <td>{{$contest->start_date}}</td>
+                                        <td>{{$contest->end_date}}</td>
+                                        <td>{{$contest->active ? "Active" : "Inactive"}}</td>
+                                        <td><a href="/admin/contest/{{$contest->id}}/edit" class="ui button">manage</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -34,7 +40,7 @@
                         </div>
                         <div class="col-md-2">
                             <a href="/admin/contest" class="ui button">see more list</a>
-                            <a href="/admin/contest/create" class="ui button">create new contest</a>
+                            <a href="/admin/contest/create" class="ui blue button">create new contest</a>
                         </div>
                     </div>
 
@@ -44,7 +50,7 @@
         <div class="ten wide column">
 
             <div class="ui segment">
-                <div class="panel-heading">Tasks</div>
+                <div class="ui header">Tasks</div>
                 <div class="panel-body">
                     <table class="ui table">
                         <thead>
@@ -73,14 +79,14 @@
 
 
                     <a href="/admin/task" class="ui button">see more list</a>
-                    <a href="/admin/task/create" class="ui button">create new task</a>
+                    <a href="/admin/task/create" class="ui blue button">create new task</a>
                 </div>
             </div>
         </div>
         <div class="six wide column">
 
             <div class="ui segment">
-                <div class="panel-heading">Categories</div>
+                <div class="ui header">Categories</div>
                 <div class="panel-body">
                     <table class="ui table">
                         <thead>
@@ -105,7 +111,7 @@
 
 
                     <a href="/admin/category" class="ui button">see more list</a>
-                    <a href="/admin/contest/create" class="ui button">create new contest</a>
+                    <a href="/admin/category/create" class="ui button blue">create new category</a>
 
                 </div>
             </div>

@@ -25,9 +25,10 @@ class Task extends Model
 
     public function getSolver(Contest $contest) {
         return Submission::whereIn('participation_id', $contest->participations->pluck('id'))
+            ->where('graded', 1)
             ->where('status', 1)
             ->where('task_id', $this->id)
-            ->orderBy('status', 'asc')
+            ->orderBy('added_time', 'asc')
             ->groupBy('participation_id')
             ->get();
     }

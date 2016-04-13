@@ -72,4 +72,20 @@ class User extends Authenticatable
         return $this->type === 1;
     }
 
+    public function getLatestSubmitTime($contest) {
+        $latestSubmit =  $this->submissions->where('status', 1)
+                    ->where('graded', 1)
+                    ->sortByDesc('added_time')
+                    ->first();
+
+        return $latestSubmit['added_time'];
+    }
+
+    public function hasSolvedAndGraded($task) {
+        return $this->submissions->where('task_id', $task->id)
+                            ->where('status', 1)
+                            ->where('graded', 1)
+                            ->count();
+    }
+
 }

@@ -39,8 +39,22 @@ class Contest extends Model
         $participations = $this->participations;
         foreach ($participations as $p) {
             $p->final_points = $p->user->score($this);
+            $p->final_latest_submit = $p->user->getLatestSubmitTime($this);
         }
-        $participations = $participations->sortByDesc('final_points');
+        // $participations = $participations
+        //                     ->sortBy('final_latest_submit')
+        //                     ->sortByDesc('final_points');
+
+
+        $participations = $participations->sort(function($a, $b) {
+            if($a->final_points === $b->final_points) {
+                if($a->final_latest_submit === $b->final_latest_submit) {
+                    return 0;
+                }
+                    return $a->final_latest_submit < $b->final_latest_submit ? -1 : 1;
+                } 
+                return $a->final_points < $b->final_points ? 1 : -1;
+        });
 
         $i = 1;
         foreach ($participations as $p) {

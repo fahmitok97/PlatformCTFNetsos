@@ -18,6 +18,7 @@ class CreateParticipationsTable extends Migration
             $table->integer('contest_id')->unsigned();
             $table->integer('final_position');
             $table->integer('final_points');
+            $table->dateTime('final_latest_submit');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('contest_id')->references('id')->on('contests');
             $table->timestamps();

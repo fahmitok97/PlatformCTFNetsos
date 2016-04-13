@@ -19,7 +19,7 @@
         <a class="active item" href="{{ url('/') }}">Home</a>
         <a class="item" href="{{ url('/contest') }}">Contest</a>
         <a class="item" href="{{ url('/') }}">Archive</a>
-        <a class="item" href="{{ url('/') }}">Leaderboard</a>
+        <a class="item" href="{{ url('/leaderboard') }}">Leaderboard</a>
         <a class="item" href="{{ url('/') }}">About</a>
         @if (Auth::check() && Auth::user()->isAdmin())
             <a class="item" href="{{ url('/admin') }}">Admin</a>
@@ -55,12 +55,15 @@
  	<div class="ui container">
 	    <div class="ui equal width grid">
 	    	<div class="column">
-	    		<h1 class="ui header inverted">{{$contests[0] -> name}}</h1>
-	    		<p>{{$contests[0] -> description}}</p>
-				@if(Auth::check() && Auth::user()->isParticipate($contests[0]))
-					<a href="/contest/{{$contests[0]->id}}" class="ui huge inverted green button">continue</a>
+	    		@if($headlineContest->active)
+				    <div class="ui teal ribbon label">Active</div>
+				@endif
+	    		<h1 class="ui header inverted">{{$headlineContest -> name}}</h1>
+	    		<p>{{$headlineContest -> description}}</p>
+				@if(Auth::check() && Auth::user()->isParticipate($headlineContest))
+					<a href="/contest/{{$headlineContest->id}}" class="ui huge inverted green button">continue</a>
 				@else
-					<a href="/contest/{{$contests[0]->id}}" class="ui huge inverted  button">join</a>
+					<a href="/contest/{{$headlineContest->id}}" class="ui huge inverted  button">join</a>
 				@endif
 	    	</div>
 	    	<div class="four wide column">
@@ -102,7 +105,7 @@
 				</form>
 	            @else
 	            <div class="text container">
-	            	<h2 class="ui header inverted">Hello, {{Auth::user()->fullname}}</h2>
+	            	<h1 class="ui header inverted"><small>Hello,</small> {{Auth::user()->username}}</h1>
 	            </div>
 				@endif
 			</div>
@@ -117,6 +120,9 @@
 				<h2 class="ui header">Latest Contests</h2>
 
 				@foreach ($contests as $contest)
+		    		@if($contest->active)
+					    <div class="ui teal ribbon label">Active</div>
+					@endif
 					<h3 class="ui header">{{$contest->name}}</h3>
 					<p>{{$contest->description}}</p>
 					@if(Auth::check() && Auth::user()->isParticipate($contests[0]))
@@ -134,7 +140,7 @@
 			</div>
 			<div class="four wide column">
 				<h3>Last week's Leaderboard</h3>
-				@include('partials.scoreboard', ['data' => $contests[0]->getFinalScoreBoardData()])
+				@include('partials.scoreboard', ['data' => $lastWeekContest->getFinalScoreBoardData()])
 				<a href="" class="ui large button">full leaderboard</a>
 			</div>
 			<div class="four wide column">

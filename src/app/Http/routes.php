@@ -9,6 +9,7 @@ use App\Task;
 use App\Submission;
 use App\Participation;
 use App\User;
+use App\Config;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,13 @@ use App\User;
 */
 
 Route::group(['middleware' => ['web']], function () {
+
     Route::get('/', function() {
+        $headlineContest = Contest::find(Config::where('key', 'headlineContest')
+                                    ->first()->value);
+        $lastWeekContest = Contest::find(Config::where('key', 'lastWeekContest')
+                                    ->first()->value);
+
    	  	$categories = Category::all();
    	  	$contests = Contest::limit(2)->get();
         $users = User::all();
@@ -48,18 +55,30 @@ Route::group(['middleware' => ['web']], function () {
     	return view('front', [
     			'categories' => $categories,
     			'contests' => $contests,
-                'users' => $users
+                'users' => $users,
+                'headlineContest' => $headlineContest,
+                'lastWeekContest' => $lastWeekContest
     		]);
     });
 
     Route::get('/contest', function() {
-        $contests = Contest::all();
+        $contests = Contest::orderBy('start_date', 'DESC')->get();
         return view('contests', [
             'contests' => $contests
             ]);
     });
 
     Route::get('/user/{user}', 'UserController@show');
+
+    Route::get('/leaderboard', function() {
+        return view('leaderboard');
+    });
+
+    Route::get('/contest/{contest}/leaderboard', function(Contest $contest) {
+        return view('leaderboard', [
+            'contest' => $contest
+            ]);
+    });
 
     Route::auth();
 
@@ -115,6 +134,11 @@ Route::group(['middleware' => ['web', 'auth']], function() {
         $submission->submitted_answer = $answer;
         $submission->status = $status;
         $submission->added_time = Carbon::now();
+        if (Auth::user()->hasSolved($task)) {
+            $submission->graded = False;
+        } else {
+            $submission->graded = True;
+        }
         $submission->save();
 
         return view('task', [

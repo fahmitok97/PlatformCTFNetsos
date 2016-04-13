@@ -19,6 +19,7 @@ class CreateSubmissionsTable extends Migration
             $table->integer('task_id')->unsigned();
             $table->string('submitted_answer');
             $table->integer('status');
+            $table->boolean('graded');
             $table->foreign('participation_id')->references('id')->on('participations');
             $table->foreign('task_id')->references('id')->on('tasks');
             $table->timestamps();

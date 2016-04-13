@@ -34,8 +34,10 @@
 									<a href="{{'/contest/' . $contest->id . '/task/' . $task->id}}">
 										{{$task->title}}
 									</a>
-									@if(Auth::user()->hasSolved($task))
+									@if(Auth::user()->hasSolvedAndGraded($task))
 										<span class="ui teal tag label">solved</span>
+									@elseif(Auth::user()->hasSolved($task))
+										<span class="ui tag label">solved</span>
 									@endif
 								</td>
 								<td>{{count($task->getSolver($contest))}}</td>

@@ -36,7 +36,14 @@
 			<div class="ui segment">
 				<h4 class="ui header"> {{$task->category->name}}</h4>
 
-				<h2 class="ui header">{{$task->title}}</h2>
+				<h2 class="ui header">
+					{{$task->title}}
+					@if(Auth::user()->hasSolvedAndGraded($task))
+						<span class="ui teal tag label">solved</span>
+					@elseif(Auth::user()->hasSolved($task))
+						<span class="ui tag label">solved</span>
+					@endif
+				</h2>
 				<p>{{$task->description}}</p>
 
 				<form action="/contest/{{$contest->id}}/task/{{$task->id}}" method="POST" class="ui form">

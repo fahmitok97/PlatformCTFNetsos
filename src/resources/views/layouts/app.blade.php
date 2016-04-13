@@ -129,7 +129,7 @@
         <a class="active item" href="{{ url('/') }}">Home</a>
         <a class="item" href="{{ url('/contest') }}">Contest</a>
         <a class="item" href="{{ url('/') }}">Archive</a>
-        <a class="item" href="{{ url('/') }}">Leaderboard</a>
+        <a class="item" href="{{ url('/leaderboard') }}">Leaderboard</a>
         <a class="item" href="{{ url('/') }}">About</a>
         @if (Auth::check() && Auth::user()->isAdmin())
             <a class="item" href="{{ url('/admin') }}">Admin</a>
