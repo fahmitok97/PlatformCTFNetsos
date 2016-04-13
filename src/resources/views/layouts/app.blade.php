@@ -126,16 +126,19 @@
 <!-- Following Menu -->
 <div class="ui large top fixed hidden menu">
     <div class="ui container">
-        <a class="active item" href="{{ url('/') }}">Home</a>
+        <a class="item" href="{{ url('/') }}">Home</a>
         <a class="item" href="{{ url('/contest') }}">Contest</a>
-        <a class="item" href="{{ url('/') }}">Archive</a>
+        <!-- <a class="item" href="{{ url('/') }}">Archive</a>
         <a class="item" href="{{ url('/leaderboard') }}">Leaderboard</a>
-        <a class="item" href="{{ url('/') }}">About</a>
+        <a class="item" href="{{ url('/') }}">About</a> -->
         @if (Auth::check() && Auth::user()->isAdmin())
             <a class="item" href="{{ url('/admin') }}">Admin</a>
         @endif
 
         <div class="right menu">
+            <div class="active item">
+              {{Carbon\Carbon::now()}}
+            </div>
             <!-- Authentication Links -->
             @if (Auth::guest())
                 <div class="item">

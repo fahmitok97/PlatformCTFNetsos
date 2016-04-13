@@ -9,8 +9,10 @@
 
 				@foreach ($contests as $contest)
 					<div class="ui raised segment">
-			    		@if($contest->active)
-						    <a class="ui teal left ribbon label">Active</a>
+			    		@if($contest->isOngoing())
+						    <a class="ui teal left ribbon label">ongoing</a>
+						@elseif($contest->isFinished())
+						    <a class="ui left ribbon label">finished</a>
 						@endif
 
 						<span class="ui header">{{$contest->name}}</span>

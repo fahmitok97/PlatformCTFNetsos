@@ -4,13 +4,21 @@
 
 <br><br><br><br>
 <div class="ui container">
-	<h1>{{$contest->name}}</h1>
-	<h4>{{$contest->description}}</h4>
+	<div class="ui grid">
+		<div class="ten wide column left aligned">
+			<h1>{{$contest->name}}</h1>
+			<h4>{{$contest->description}}</h4>
+		</div>
+		<div class="six wide column right aligned">
+			<h5>Start: {{$contest->start_date}}</h5>
+			<h5>End: {{$contest->end_date}}</h5>
+		</div>
+	</div>
 
 	<br>
 
 	<div class="ui grid">
-		<div class="twelve wide column">
+		<div class="ten wide column">
 
 			@foreach($categories as $category)
 				
@@ -57,8 +65,12 @@
 			@endforeach
 
 		</div>
-		<div class="four wide column">
-			@include('partials.scoreboard', ['data' => $contest->getScoreBoardData()])
+		<div class="six wide column">
+			<h3 class="ui header">Leaderboard</h3>
+			@include('partials.scoreboard', [
+				'data' => $contest->getScoreBoardData(),
+				'useLatestSubmit' => True
+				])
 		</div>
 
 	</div>

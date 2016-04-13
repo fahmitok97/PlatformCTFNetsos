@@ -37,27 +37,36 @@ use App\Config;
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', function() {
-        $headlineContest = Contest::find(Config::where('key', 'headlineContest')
-                                    ->first()->value);
-        $lastWeekContest = Contest::find(Config::where('key', 'lastWeekContest')
-                                    ->first()->value);
+        $headlineContestId = Config::where('key', 'headlineContest')->first()->value;
+        $lastWeekContestId = Config::where('key', 'lastWeekContest')->first()->value;
 
+        $headlineContest = Contest::find($headlineContestId);
+
+        if ($lastWeekContestId == -1) {
+            $showLastWeekLeaderboard = True;
+            $lastWeekContest = null;
+        } else {
+            $showLastWeekLeaderboard = False;
+            $lastWeekContest = Contest::find($lastWeekContestId);
+        }
+
+        $latestContests = Contest::limit(2)->get();
    	  	$categories = Category::all();
-   	  	$contests = Contest::limit(2)->get();
-        $users = User::all();
 
+        $users = User::all();
         foreach ($users as $user) {
             $user->total_score = $user->getTotalScore();
         }
-
         $users = $users->sortByDesc('total_score');
+        $users = $users->take(10);
 
     	return view('front', [
     			'categories' => $categories,
-    			'contests' => $contests,
+    			'contests' => $latestContests,
                 'users' => $users,
                 'headlineContest' => $headlineContest,
-                'lastWeekContest' => $lastWeekContest
+                'lastWeekContest' => $lastWeekContest,
+                'showLastWeekLeaderboard' => $showLastWeekLeaderboard
     		]);
     });
 

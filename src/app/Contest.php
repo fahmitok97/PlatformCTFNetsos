@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Contest extends Model
 {
@@ -66,6 +67,15 @@ class Contest extends Model
 
     public function getFinalScoreBoardData() {
         return $this->participations->sortByDesc('final_position');
+    }
+
+    public function isOngoing() {
+        $now = Carbon::now();
+        return ($this->start_date < $now && $now < $this->end_date);
+    }
+
+    public function isFinished() {
+        return Carbon::now() > $this->end_date;
     }
 
 }

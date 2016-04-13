@@ -16,6 +16,7 @@ class CreateParticipationsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('contest_id')->unsigned();
+            $table->boolean('graded');
             $table->integer('final_position');
             $table->integer('final_points');
             $table->dateTime('final_latest_submit');

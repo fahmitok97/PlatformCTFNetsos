@@ -55,11 +55,18 @@
  	<div class="ui container">
 	    <div class="ui equal width grid">
 	    	<div class="column">
-	    		@if($headlineContest->active)
-				    <div class="ui teal ribbon label">Active</div>
-				@endif
-	    		<h1 class="ui header inverted">{{$headlineContest -> name}}</h1>
-	    		<p>{{$headlineContest -> description}}</p>
+	    		<h1 class="ui header inverted">
+	    			{{$headlineContest -> name}}
+	    			@if($headlineContest->isOngoing())
+					    <div class="ui teal label">ongoing</div>
+					@elseif($headlineContest->isFinished())
+					    <div class="ui label">finished</div>
+					@endif
+			    		</h1>
+	    		<p>
+	    			{{$headlineContest -> description}}
+	    		</p>
+
 				@if(Auth::check() && Auth::user()->isParticipate($headlineContest))
 					<a href="/contest/{{$headlineContest->id}}" class="ui huge inverted green button">continue</a>
 				@else
@@ -120,10 +127,14 @@
 				<h2 class="ui header">Latest Contests</h2>
 
 				@foreach ($contests as $contest)
-		    		@if($contest->active)
-					    <div class="ui teal ribbon label">Active</div>
-					@endif
-					<h3 class="ui header">{{$contest->name}}</h3>
+					<h3 class="ui header">
+						{{$contest->name}}
+			    		@if($contest->isOngoing())
+						    <div class="ui teal label">ongoing</div>
+						@elseif($contest->isFinished())
+						    <div class="ui label">finished</div>
+						@endif
+					</h3>
 					<p>{{$contest->description}}</p>
 					@if(Auth::check() && Auth::user()->isParticipate($contests[0]))
 						<a href="/contest/{{$contest->id}}" class="ui large inverted green button">continue</a>
@@ -133,15 +144,21 @@
 				@endforeach
 				
 				<br><br>
-				<a href="/contest" class="ui large button">More news</a>
+				<a href="/contest" class="ui large button">More contests</a>
 			</div>
 			<div class="ui vertical divider">
 				Or
 			</div>
 			<div class="four wide column">
 				<h3>Last week's Leaderboard</h3>
-				@include('partials.scoreboard', ['data' => $lastWeekContest->getFinalScoreBoardData()])
-				<a href="" class="ui large button">full leaderboard</a>
+				@if(isset($showLastWeekLeaderboard) && $showLastWeekLeaderboard)
+					@include('partials.scoreboard', [
+						'data' => $lastWeekContest->getFinalScoreBoardData()
+						])
+					<a href="url('/contest/' . $lastWeekContest->id . '/leaderboard'" class="ui large button">full leaderboard</a>
+				@else
+					<p>No data to be shown</p>
+				@endif
 			</div>
 			<div class="four wide column">
 				<h3>All time Top Ten</h3>

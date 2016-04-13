@@ -18,8 +18,18 @@ class UsersTableSeeder extends Seeder
             'fullname' => str_random(8),
             'email' => 'user' . $i .'@mail.com',
             'password' => bcrypt('secret'),
+            'type' => 0
         ]);
 
     	endfor;
+
+        DB::table('users')->insert([
+            'username' => 'admin',
+            'fullname' => 'administrator',
+            'email' => 'admin@mail.com',
+            'password' => bcrypt('admin'),
+            'type' => 1
+        ]);
+
     }
 }

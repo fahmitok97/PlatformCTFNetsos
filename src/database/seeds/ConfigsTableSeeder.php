@@ -18,7 +18,7 @@ class ConfigsTableSeeder extends Seeder
 
         DB::table('configs')->insert([
             'key' => 'LastWeekContest',
-            'value' => '1',
+            'value' => '-1',
         ]);
 
     }
