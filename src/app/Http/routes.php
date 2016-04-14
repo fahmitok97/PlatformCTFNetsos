@@ -43,10 +43,10 @@ Route::group(['middleware' => ['web']], function () {
         $headlineContest = Contest::find($headlineContestId);
 
         if ($lastWeekContestId == -1) {
-            $showLastWeekLeaderboard = True;
+            $showLastWeekLeaderboard = False;
             $lastWeekContest = null;
         } else {
-            $showLastWeekLeaderboard = False;
+            $showLastWeekLeaderboard = True;
             $lastWeekContest = Contest::find($lastWeekContestId);
         }
 
