@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ContestTaskTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(ParticipationsTableSeeder::class);
+        $this->call(ConfigsTableSeeder::class);
     }
 }
