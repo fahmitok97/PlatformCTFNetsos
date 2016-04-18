@@ -10,7 +10,7 @@
             <div class="ui segment">
                 <div class="ui header">Edit Contest</div>
                 <div>
-                    <form class="ui form" method="POST" action="/admin/contest/{{$contest->id}}">
+                    <form class="ui form" method="POST" action="{{ url('/admin/contest/' . $contest->id) }}">
                         {!! csrf_field() !!}
                         {!! method_field('PUT') !!}
                         <div class="field">
@@ -76,7 +76,7 @@
                 <div>
                     <div class="eight column wide">
 
-                        <form action="{{ '/admin/contest/' . $contest->id . '/task' }}" method="POST" class="ui form inline?">
+                        <form action="{{ url('/admin/contest/' . $contest->id . '/task') }}" method="POST" class="ui form inline?">
                             {!! csrf_field() !!}
                             {!! method_field('PUT') !!}
                             <div class="field">
@@ -116,12 +116,12 @@
                                     <td>{{$task->pivot->points}}</td>
                                     <td>
 
-                                    <form action="/admin/contest/{{$contest->id}}/task/{{$task->id}}" method="POST">
+                                    <form action="{{ url('/admin/contest/' . $contest->id. '/task/' . $task->id) }}" method="POST">
                                         {!! csrf_field() !!}
                                         {!! method_field('DELETE') !!}
                                         <button class="ui button red" type="submit">remove</button>
                                     </form>
-                                    <a href="/admin/task/{{$task->id}}/edit" class="ui button">edit</a></td>
+                                    <a href="{{ url('/admin/task/'. $task->id . '/edit') }}" class="ui button">edit</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -156,12 +156,12 @@
                                 <td>{{$submission->id}}</td>
                                 <td>{{$submission->added_time}}</td>
                                 <td>
-                                    <a href="{{'/user/' . $submission->participation->user->id}}">
+                                    <a href="{{ url('/user/' . $submission->participation->user->id) }}">
                                         {{$submission->participation->user->username}}
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{'/contest/' . $contest->id . '/task/' . $submission->task->id}}">
+                                    <a href="{{ url('/contest/' . $contest->id . '/task/' . $submission->task->id) }}">
                                     {{$submission->task->title}}
                                     </a>
                                 </td>

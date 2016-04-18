@@ -68,9 +68,9 @@
 	    		</p>
 
 				@if(Auth::check() && Auth::user()->isParticipate($headlineContest))
-					<a href="/contest/{{$headlineContest->id}}" class="ui huge inverted green button">continue</a>
+					<a href="{{ url('/contest/' . $headlineContest->id) }}" class="ui huge inverted green button">continue</a>
 				@else
-					<a href="/contest/{{$headlineContest->id}}" class="ui huge inverted  button">join</a>
+					<a href="{{ url('/contest/' . $headlineContest->id) }}" class="ui huge inverted  button">join</a>
 				@endif
 	    	</div>
 	    	<div class="four wide column">
@@ -137,14 +137,14 @@
 					</h3>
 					<p>{{$contest->description}}</p>
 					@if(Auth::check() && Auth::user()->isParticipate($contests[0]))
-						<a href="/contest/{{$contest->id}}" class="ui large inverted green button">continue</a>
+						<a href="{{ url('/contest/' . $contest->id) }}" class="ui large inverted green button">continue</a>
 					@else
-						<a href="/contest/{{$contest->id}}" class="ui large inverted blue button">join</a>
+						<a href="{{ url('/contest/' . $contest->id) }}" class="ui large inverted blue button">join</a>
 					@endif
 				@endforeach
 				
 				<br><br>
-				<a href="/contest" class="ui large button">More contests</a>
+				<a href="{{ url('/contest') }}" class="ui large button">More contests</a>
 			</div>
 			<div class="ui vertical divider">
 				Or

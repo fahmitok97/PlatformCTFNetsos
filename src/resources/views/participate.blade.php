@@ -17,7 +17,7 @@
 				<p>{{$contest->description}}</p>
 				<br>
 
-				<form action="/participate/{{$contest->id}}" method="POST">
+				<form action="{{ url('/participate/' . $contest->id) }}" method="POST">
                     {!! csrf_field() !!}
 					<button type="submit" class="ui button teal">Participate</button>
 					<a href="{{ url('/contest') }}" class="ui button red">Cancel</a>

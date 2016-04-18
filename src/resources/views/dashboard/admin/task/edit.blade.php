@@ -9,7 +9,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Add task</div>
                 <div class="panel-body">
-                    <form method="POST" action="/admin/task/{{$task->id}}">
+                    <form method="POST" action="{{ url('/admin/task/' . $task->id) }}">
                         {!! csrf_field() !!}
                         {!! method_field('PUT') !!}
                         <div class="form-group">

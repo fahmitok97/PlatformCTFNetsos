@@ -26,7 +26,7 @@
 							<td>{{$task->id}}</td>
 							<td>{{$task->title}}</td>
 							<td>0</td>
-							<td><a href="/task/{{$task->id}}" class="btn btn-default">solve</a></td>
+							<td><a href="{{ url('task/' . $task->id ) }}" class="btn btn-default">solve</a></td>
 						</tr>
 
 					@empty

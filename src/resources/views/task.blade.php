@@ -6,7 +6,7 @@
 <div class="ui container">
 
 	<h1 class="ui header">
-	<a href="/contest/{{$contest->id}}"><i class="fa fa-arrow-left"></i>  {{$contest->name}}</a>
+	<a href="{{ url('/contest/' . $contest->id) }}"><i class="fa fa-arrow-left"></i>  {{$contest->name}}</a>
 	</h1>
 	<!-- <h4>{{$contest->description}}</h4> -->
 
@@ -46,7 +46,7 @@
 				</h2>
 				<p>{{$task->description}}</p>
 
-				<form action="/contest/{{$contest->id}}/task/{{$task->id}}" method="POST" class="ui form">
+				<form action="{{ url('/contest/' . $contest->id . '/task/' . $task->id) }}" method="POST" class="ui form">
                     {!! csrf_field() !!}
                     {!! method_field('PUT') !!}
                     <div class="field">

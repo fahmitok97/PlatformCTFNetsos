@@ -9,7 +9,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Add category</div>
                 <div class="panel-body">
-                    <form method="POST" action="/admin/category/{{$category->id}}">
+                    <form method="POST" action="{{ url('/admin/category' . $category->id) }}">
                         {!! csrf_field() !!}
                         {!! method_field('PUT') !!}
                         <div class="form-group">

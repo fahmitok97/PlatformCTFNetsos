@@ -9,7 +9,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Contest Information</div>
                 <div class="panel-body">
-                    <form method="POST" action="/admin/contest/{{$contest->id}}">
+                    <form method="POST" action="{{ url('/admin/contest/' . $contest->id) }}">
                         {!! csrf_field() !!}
                         {!! method_field('PUT') !!}
                         <div class="form-group">
@@ -64,7 +64,7 @@
                 <div class="panel-body">
                     <div class="col-md-6">
 
-                        <form action="{{ '/admin/contest/' . $contest->id . '/task' }}" method="POST" class="form-horizontal">
+                        <form action="{{ url('/admin/contest/' . $contest->id . '/task') }}" method="POST" class="form-horizontal">
                             {!! csrf_field() !!}
                             {!! method_field('PUT') !!}
                             <div class="form-group">
@@ -104,12 +104,12 @@
                                     <td>{{$task->pivot->points}}</td>
                                     <td>
 
-                                    <form action="/admin/contest/{{$contest->id}}/task/{{$task->id}}" method="POST">
+                                    <form action="{{ url('/admin/contest/' . $contest->id . '/task/' . $task->id) }}" method="POST">
                                         {!! csrf_field() !!}
                                         {!! method_field('DELETE') !!}
                                         <button class="btn btn-default" type="submit">remove</button>
                                     </form>
-                                    <a href="/admin/task/{{$task->id}}/edit" class="btn btn-default">edit</a></td>
+                                    <a href="{{ url('/admin/task/create . $task->id . '/edit') }}" class="btn btn-default">edit</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

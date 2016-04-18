@@ -8,7 +8,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a href="/admin/category/create" class="btn btn-default">create new category</a>
+                    <a href="{{ url('/admin/category/create') }}" class="btn btn-default">create new category</a>
                 </div>
             </div>
 
@@ -30,7 +30,7 @@
                                 <td>{{$category->id}}</td>
                                 <td>{{$category->name}}</td>
                                 <td>{{$category->description}}</td>
-                                <td><a href="/admin/category/{{$category->id}}/edit" class="btn btn-default">edit</a></td>
+                                <td><a href="{{ url('admin/category/'. $category->id . '/edit'); }}" class="btn btn-default">edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>

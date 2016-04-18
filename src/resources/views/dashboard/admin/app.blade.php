@@ -32,15 +32,15 @@
                                         <td>{{$contest->start_date}}</td>
                                         <td>{{$contest->end_date}}</td>
                                         <td>{{$contest->active ? "Active" : "Inactive"}}</td>
-                                        <td><a href="/admin/contest/{{$contest->id}}/edit" class="ui button">manage</a></td>
+                                        <td><a href="{{ url('/admin/contest/' . $contest->id . '/edit') }}" class="ui button">manage</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>                
                         </div>
                         <div class="col-md-2">
-                            <a href="/admin/contest" class="ui button">see more list</a>
-                            <a href="/admin/contest/create" class="ui blue button">create new contest</a>
+                            <a href="{{ url('/admin/contest/') }}" class="ui button">see more list</a>
+                            <a href="{{ url('/admin/contest/create') }}" class="ui blue button">create new contest</a>
                         </div>
                     </div>
 
@@ -71,15 +71,15 @@
                                 <td>{{$task->description}}</td>
                                 <td>{{$task->category->name}}</td>
                                 <td>{{$task->default_points}}</td>
-                                <td><a href="/admin/task/{{$task->id}}/edit" class="ui button">edit</a></td>
+                                <td><a href="{{ url('/admin/task/' . $task->id . '/edit') }}" class="ui button">edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>                
 
 
-                    <a href="/admin/task" class="ui button">see more list</a>
-                    <a href="/admin/task/create" class="ui blue button">create new task</a>
+                    <a href="{{ url('/admin/task/') }}" class="ui button">see more list</a>
+                    <a href="{{ url('/admin/task/create') }}" class="ui blue button">create new task</a>
                 </div>
             </div>
         </div>
@@ -103,15 +103,15 @@
                                 <td>{{$category->id}}</td>
                                 <td>{{$category->name}}</td>
                                 <td>{{$category->description}}</td>
-                                <td><a href="/admin/category/{{$category->id}}/edit" class="ui button">edit</a></td>
+                                <td><a href="{{ url('/admin/category/' . $category->id . '/edit') }}" class="ui button">edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>                
 
 
-                    <a href="/admin/category" class="ui button">see more list</a>
-                    <a href="/admin/category/create" class="ui button blue">create new category</a>
+                    <a href="{{ url('/admin/category/') }}" class="ui button">see more list</a>
+                    <a href="{{ url('/admin/category/create') }}" class="ui button blue">create new category</a>
 
                 </div>
             </div>

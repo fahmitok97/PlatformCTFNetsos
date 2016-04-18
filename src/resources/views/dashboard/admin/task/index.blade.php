@@ -8,7 +8,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a href="/admin/task/create" class="btn btn-default">create new task</a>
+                    <a href="{{ url('/admin/task/create') }}" class="btn btn-default">create new task</a>
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                                 <td>{{$task->category->name}}</td>
                                 <td>{{$task->default_points}}</td>
                                 <td>{{$task->answer}}</td>
-                                <td><a href="/admin/task/{{$task->id}}/edit" class="btn btn-default">edit</a></td>
+                                <td><a href="{{ url('/admin/task/create . $task->id . '/edit') }}" class="btn btn-default">edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>

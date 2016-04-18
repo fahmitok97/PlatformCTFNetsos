@@ -8,7 +8,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a href="/admin/category/create" class="btn btn-default">create new Contest</a>
+                    <a href="{{ url('/admin/category/create') }}" class="btn btn-default">create new Contest</a>
                 </div>
             </div>
 
@@ -38,7 +38,7 @@
                                 <td>{{$contest->start_date}}</td>
                                 <td>{{$contest->end_date}}</td>
                                 <td>{{count($contest->participations)}}</td>
-                                <td><a href="/admin/contest/{{$contest->id}}/edit" class="btn btn-default">edit</a></td>
+                                <td><a href="{{ url('/admin/contest/' . $contest->id . '/edit') }} class="btn btn-default">edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>

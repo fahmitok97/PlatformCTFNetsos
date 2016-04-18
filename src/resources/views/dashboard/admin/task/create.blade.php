@@ -9,7 +9,7 @@
             <div class="ui segment">
                 <div class="ui header">Add task</div>
                 <div>
-                    <form method="POST" action="/admin/task" class="ui form">
+                    <form method="POST" action="{{ url('/admin/task') }}" class="ui form">
                         {!! csrf_field() !!}
                         <div class="field">
                             <label for="" class="control-label">Task Title</label>
