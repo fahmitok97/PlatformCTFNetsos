@@ -136,7 +136,7 @@
         @endif
 
         <div class="right menu">
-            <div class="active item">
+            <div class="active item" id="current_time">
               {{Carbon\Carbon::now()}}
             </div>
             <!-- Authentication Links -->
@@ -180,14 +180,32 @@
 </div>
 
     <!-- JavaScripts -->
-    <script src="js/app.js"></script>
+    <script src="{{url('/js/app.js')}}"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 
     <script>
         $(document).ready(function() {
             // create sidebar and attach to menu open
             $('.ui.sidebar').sidebar('attach events', '.toc.item');
+            // start clock
+            clock();
         });
+
+        function clock() {
+          console.log('clock called');
+          var now = new Date();
+          var h = pad(now.getHours());
+          var m = pad(now.getMinutes());
+          var s = pad(now.getSeconds());
+          $('#current_time').html(h + ":" + m + ":" + s);
+          var t = setTimeout(clock, 500);
+        }
+
+        function pad(num) {
+          if (num < 10)
+            num = "0" + num;
+          return num;
+        }
     </script>
 
     @yield('tail')
