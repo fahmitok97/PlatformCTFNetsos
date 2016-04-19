@@ -20,10 +20,6 @@
                             <td>fullname</td>
                             <td>{{$user->fullname}}</td>
                         </tr>
-                        <tr>
-                            <td>email</td>
-                            <td>{{$user->email}}</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -35,9 +31,9 @@
                 <table class="ui table">
                     <thead>
                         <th>#</th>
-                        <th>contest name</th>
-                        <th>position</th>
-                        <th>points</th>
+                        <th>Contest Name</th>
+                        <th>Position</th>
+                        <th>Points</th>
                     </thead>
                     <tbody>
                         @foreach($user->participations as $participation)

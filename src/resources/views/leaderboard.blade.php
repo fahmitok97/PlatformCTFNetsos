@@ -11,8 +11,11 @@
 	<br>
 
 	<div class="ui grid">
-		<div class="sixteen wide column">
-			@include('partials.scoreboard', ['data' => $contest->getScoreBoardData()])
+		<div class="eight wide column">
+			@include('partials.scoreboard', [
+				'data' => $contest->getScoreBoardData(),
+				'useLatestSubmit' => True
+			])
 		</div>
 
 	</div>

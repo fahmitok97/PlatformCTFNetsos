@@ -16,7 +16,11 @@
             <td><a href="{{ url('/user/' . $row->user->id) }}">{{$row->user->username}}</a></td>
             <td>{{$row->final_points}}</td>
             @if(isset($useLatestSubmit) && $useLatestSubmit)
-                <td>{{$row->final_latest_submit}}</td>
+                @if(isset($row->final_latest_submit))
+                    <td><time title="{{$row->final_latest_submit}}">{{Carbon\Carbon::parse($row->final_latest_submit)->diffForHumans()}}</time></td>
+                @else
+                    <td>-</td>
+                @endif
             @endif
         </tr>
         @endforeach

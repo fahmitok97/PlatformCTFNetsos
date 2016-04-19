@@ -10,8 +10,16 @@
 			<h4>{{$contest->description}}</h4>
 		</div>
 		<div class="six wide column right aligned">
-			<h5>Start: {{$contest->start_date}}</h5>
-			<h5>End: {{$contest->end_date}}</h5>
+			<h5>
+				<time title="{{$contest->start_date}}">
+					Start: {{Carbon\Carbon::parse($contest->start_date)->diffForHumans()}}
+				</time>
+			</h5>
+			<h5>
+				<time title="{{$contest->end_date}}">
+					End: {{Carbon\Carbon::parse($contest->end_date)->diffForHumans()}}
+				</time>
+			</h5>
 		</div>
 	</div>
 

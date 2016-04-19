@@ -23,6 +23,10 @@
         .fa-btn {
             margin-right: 6px;
         }
+
+        time {
+          border-bottom: #333 1px dotted;
+        }
     </style>
 
     <style type="text/css">
