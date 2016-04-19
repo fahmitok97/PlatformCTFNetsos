@@ -143,7 +143,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
         $submission->submitted_answer = $answer;
         $submission->status = $status;
         $submission->added_time = Carbon::now();
-        if (Auth::user()->hasSolved($task)) {
+        if (Auth::user()->hasSolved($task) || $contest->isFinished()) {
             $submission->graded = False;
         } else {
             $submission->graded = True;

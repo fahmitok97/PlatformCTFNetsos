@@ -39,7 +39,7 @@
 							<tr>
 								<td>{{$task->id}}</td>
 								<td>
-									<a href="{{ url('contest/' . $contest->id . '/task/' . $task->id ); }}">
+									<a href="{{ url('contest/' . $contest->id . '/task/' . $task->id ) }}">
 										{{$task->title}}
 									</a>
 									@if(Auth::user()->hasSolvedAndGraded($task))
@@ -51,7 +51,7 @@
 								<td>{{count($task->getSolver($contest))}}</td>
 								<td>{{$task->pivot->points}}</td>
 								<td>
-									<a href="{{ url('/contest/'. $contest->id . '/task/' . $task->id); }}" class="ui button">solve</a>
+									<a href="{{ url('/contest/'. $contest->id . '/task/' . $task->id) }}" class="ui button">solve</a>
 								</td>
 							</tr>
 

@@ -21,9 +21,9 @@
 						<p> participants: {{$contest->participations->count()}} </p>
 
 						@if(Auth::check() && Auth::user()->isParticipate($contest))
-							<a href="{{ url('/contest/' . $contest->id); }}" class="ui button green inverted">continue</a>
+							<a href="{{ url('/contest/' . $contest->id) }}" class="ui button green inverted">continue</a>
 						@else
-							<a href="{{ url('/contest/' . $contest->id); }}" class="ui button blue inverted">join</a>
+							<a href="{{ url('/contest/' . $contest->id) }}" class="ui button blue inverted">join</a>
 						@endif
 						<a href="{{ url('/contest/' . $contest->id . '/leaderboard' ) }}" class="ui button blue inverted">Leaderboard</a>
 					</div>

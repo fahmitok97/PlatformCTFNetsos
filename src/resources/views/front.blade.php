@@ -18,9 +18,9 @@
 
         <a class="active item" href="{{ url('/') }}">Home</a>
         <a class="item" href="{{ url('/contest') }}">Contest</a>
-        <a class="item" href="{{ url('/') }}">Archive</a>
-        <a class="item" href="{{ url('/leaderboard') }}">Leaderboard</a>
-        <a class="item" href="{{ url('/') }}">About</a>
+        <!-- <a class="item" href="{{ url('/') }}">Archive</a> -->
+        <!-- <a class="item" href="{{ url('/leaderboard') }}">Leaderboard</a> -->
+        <!-- <a class="item" href="{{ url('/') }}">About</a> -->
         @if (Auth::check() && Auth::user()->isAdmin())
             <a class="item" href="{{ url('/admin') }}">Admin</a>
         @endif
@@ -72,6 +72,7 @@
 				@else
 					<a href="{{ url('/contest/' . $headlineContest->id) }}" class="ui huge inverted  button">join</a>
 				@endif
+				<a href="{{ url('/contest/' . $headlineContest->id) . '/leaderboard'}}" class="ui huge inverted  button">leaderboard</a>
 	    	</div>
 	    	<div class="four wide column">
 	    		@if (Auth::guest())
@@ -141,6 +142,7 @@
 					@else
 						<a href="{{ url('/contest/' . $contest->id) }}" class="ui large inverted blue button">join</a>
 					@endif
+					<a href="{{ url('/contest/' . $contest->id) . '/leaderboard'}}" class="ui large inverted blue button">leaderboard</a>
 				@endforeach
 				
 				<br><br>
@@ -182,7 +184,7 @@
 					</tbody>
 				</table>
 
-				<a href="" class="ui large button">full leaderboard</a>
+				<!-- <a href="" class="ui large button">full leaderboard</a> -->
 			</div>
 		</div>
 	</div>

@@ -39,7 +39,10 @@ class User extends Authenticatable
                                         ->where('contest_id', $contest->id)
                                         ->first()->id;
         $correctTask = Submission::where('participation_id', $participation)
-                        ->where('status', 1)->pluck('task_id')->all();
+                                        ->where('graded', 1)
+                                        ->where('status', 1)
+                                        ->pluck('task_id')
+                                        ->all();
 
         $total = 0;
         foreach($contest->tasks->wherein('id', $correctTask) as $t) {
