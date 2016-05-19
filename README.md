@@ -28,3 +28,6 @@ php artisan migrate --seed
 # serve
 php artisan serve
 ```
+
+## Contributing
+Please read [ this ](https://github.com/adamyordan/PlatformCTFNetsos/wiki/Contributing) for more information.
