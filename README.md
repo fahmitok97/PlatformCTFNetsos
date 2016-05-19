@@ -1,6 +1,4 @@
 # PlatformCTFNetsos
- 
-/* created by AJ, disclaimer: gw ga ngerti cuy */
 
 ToDo
 ====
