@@ -2,139 +2,88 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Carbon\Carbon;
+
 use App\Contest;
 use App\Category;
 use App\Task;
-use App\User;
+use App\Submission;
+use App\Participation;
 
 class ContestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $contests = Contest::all();
-        return view('dashboard.admin.contest.index', [
+    public function index() {
+        $contests = Contest::orderBy('start_date', 'DESC')->get();
+        return view('contests', [
             'contests' => $contests
             ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('dashboard.admin.contest.create');
-    }
+    public function show(Contest $contest) {
+        if (Participation::where('user_id', Auth::user()->id)->where('contest_id', $contest->id)->get()->isEmpty())
+            return redirect('/participate/' . $contest->id);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
+        $category_ids = $contest->tasks->pluck('category_id')->all();
+        $categories =  Category::find($category_ids);
 
-        $contest = new Contest;
-        $contest->name = $request->input('name');
-        $contest->description = $request->input('description');
-        $contest->save();
-
-        return redirect('admin/contest/' . $contest->id . '/edit');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return view('dashboard.admin.contest.show', [
-                'contest' => Contest::find($id)
-            ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $contest = Contest::find($id);
-        $users = User::find($contest->participations->pluck('user_id')->all());
-        return view('dashboard.admin.contest.edit', [
+        return view('contest', [
                 'contest' => $contest,
-                'tasks' => Task::all(),
-                'users' => $users
+                'categories' => $categories,
             ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-            'name' => 'required|max:255',
+    public function showTask(Contest $contest, Task $task) {
+        if (Participation::where('user_id', Auth::user()->id)->where('contest_id', $contest->id)->get()->isEmpty())
+            return redirect('/participate/' . $contest->id);
+
+        if(count($contest->tasks->where('id', $task->id))) {
+            return view('task', [
+               'task' => $task,
+               'contest' => $contest
+            ]);
+        } else {
+            return "what are you doing?";
+        }
+    }
+
+    public function submitTask(Contest $contest, Task $task, Request $request) {
+        if (Participation::where('user_id', Auth::user()->id)->where('contest_id', $contest->id)->get()->isEmpty())
+            return redirect('/participate/' . $contest->id);
+
+        if(!count($contest->tasks->where('id', $task->id)))
+            return "what are you doing?";
+
+        $answer = $request->input('answer');
+        $status = ($answer == $task->answer);
+
+        $submission = new Submission;
+        $submission->participation_id = Participation::where('user_id', Auth::user()->id)
+                                        ->where('contest_id', $contest->id)->first()->id;
+        $submission->task_id = $task->id;
+        $submission->submitted_answer = $answer;
+        $submission->status = $status;
+        $submission->added_time = Carbon::now();
+        if (Auth::user()->hasSolved($task) || $contest->isFinished()) {
+            $submission->graded = False;
+        } else {
+            $submission->graded = True;
+        }
+        $submission->save();
+
+        return view('task', [
+           'task' => $task,
+           'contest' => $contest,
+           'status' => $status
         ]);
 
-        $contest = Contest::find($id);
-        $contest->name = $request->input('name');
-        $contest->description = $request->input('description');
-        $contest->save();
-
-        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-
-    public function addTask(Request $request, Contest $contest)
-    {
-        $taskId = $request->input('task-id');
-        $points = $request->input('task-points');
-        if($contest->tasks->where('id', intval($taskId))->count()) {
-            $task = $contest->tasks->where('id', intval($taskId))->first();
-            $task->pivot->points = $points;
-            $task->pivot->save();
-        } else {
-            $contest->tasks()->attach($taskId, ['points' => $points]);
-        }
-        return back();
-    }
-
-    public function deleteTask(Contest $contest, Task $task)
-    {
-        $contest->tasks()->detach($contest->id);
-        return back();
+    public function showLeaderboard(Contest $contest) {
+        return view('leaderboard', [
+            'contest' => $contest
+            ]);
     }
 }
