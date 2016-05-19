@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
+use App\Task;
 use App\Category;
 
-class CategoryController extends Controller
+class Admin\TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('dashboard.admin.category.index', [
-                'categories' => Category::all()
+        return view('dashboard.admin.task.index', [
+                'tasks' => Task::all()
             ]);
     }
 
@@ -29,7 +29,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.admin.category.create');
+        return view('dashboard.admin.task.create', [
+                'categories' => Category::all()
+            ]);
     }
 
     /**
@@ -41,13 +43,16 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
+            'title' => 'required|max:255',
         ]);
 
-        $category = new Category;
-        $category->name = $request->input('name');
-        $category->description = $request->input('description');
-        $category->save();
+        $task = new Task;
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');
+        $task->category_id = $request->input('category');
+        $task->answer = $request->input('answer');
+        $task->default_points = $request->input('points');
+        $task->save();
 
         return back();
     }
@@ -60,9 +65,6 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return view('category', [
-                'category' => Category::find($id)
-        ]);
     }
 
     /**
@@ -73,8 +75,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('dashboard.admin.category.edit', [
-                'category' => Category::find($id)
+        return view('dashboard.admin.task.edit', [
+                'task' => Task::find($id)
         ]);
     }
 
@@ -88,13 +90,13 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
+            'title' => 'required|max:255',
         ]);
 
-        $category = Category::find($id);
-        $category->name = $request->input('name');
-        $category->description = $request->input('description');
-        $category->save();
+        $task = Task::find($id);
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');
+        $task->save();
 
         return back();
     }
